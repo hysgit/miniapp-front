@@ -1,0 +1,12 @@
+<view class="container">
+  <view class="header">
+    <text>{{date}} 打卡记录</text>
+  </view>
+  <view class="check-in-list">
+    <block wx:for="{{checkInTimes}}" wx:key="id">
+      <view class="check-in-item">
+        <text>{{item.formattedTime}}</text>
+      </view>
+    </block>
+  </view>
+</view>

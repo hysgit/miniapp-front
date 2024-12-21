@@ -1,0 +1,26 @@
+<view class="container">
+  <view class="header">
+    <text class="title">我的运动</text>
+    <button class="add-btn" bindtap="navigateToCreate">创建运动项目</button>
+  </view>
+
+  <view class="exercise-list" wx:if="{{!loading && exercises.length > 0}}">
+    <view class="exercise-item" 
+          wx:for="{{exercises}}" 
+          wx:key="id" 
+          bindtap="navigateToDetail" 
+          data-id="{{item.id}}"
+          data-name="{{item.name}}"
+          data-type="{{item.excetype}}">
+      <text class="exercise-name">{{item.name}}</text>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:if="{{!loading && exercises.length === 0}}">
+    <text class="empty-text">您还没有运动项目</text>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

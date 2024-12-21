@@ -1,0 +1,7 @@
+<view class="container">
+
+  <view class="button-container">
+    <button class="btn" bindtap="startRecord">开始记录</button>
+    <button class="btn history" bindtap="viewHistory">查看历史记录</button>
+  </view>
+</view>

@@ -1,0 +1,7 @@
+<view class="container">
+  <view class="exercise-name">{{exerciseName}}</view>
+  <view class="button-container">
+    <button class="btn check-in-btn" bindtap="checkIn">打卡</button>
+    <button class="btn history-btn" bindtap="viewHistory">查看历史记录</button>
+  </view>
+</view>

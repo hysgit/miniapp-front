@@ -1,0 +1,31 @@
+<!-- 容器 -->
+<view class="container">
+  <!-- 月份选择器 -->
+  <picker mode="date" fields="month" value="{{currentMonth}}" bindchange="onMonthChange">
+    <view class="month-picker">
+      <text>{{currentMonth}}</text>
+    </view>
+  </picker>
+
+  <!-- 记录列表 -->
+  <view class="record-list">
+    <view class="daily-record" wx:for="{{dailyRecords}}" wx:key="date">
+      <view class="record-content">
+        <view class="record-main">
+          <text class="record-date">{{item.date}}日</text>
+          <text class="record-duration">{{item.totalDurationText}}</text>
+          <text class="record-count">({{item.recordCount}}次)</text>
+        </view>
+        <view class="record-cells">
+          <view class="record-cell {{record ? 'has-record' : ''}}" 
+                wx:for="{{item.displayRecords}}" 
+                wx:for-item="record" 
+                wx:key="index">
+            <text wx:if="{{record}}" class="duration">{{record.durationText}}</text>
+            <text wx:else>-</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

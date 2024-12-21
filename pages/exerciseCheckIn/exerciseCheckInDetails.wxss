@@ -1,0 +1,17 @@
+/* 样式文件 */
+.container {
+  padding: 20px;
+}
+.header {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.check-in-list {
+  margin-top: 10px;
+}
+.check-in-item {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  font-size: 16px;
+  color: #333;
+}

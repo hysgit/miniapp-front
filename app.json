@@ -1,0 +1,34 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/createExercise/createExercise",
+    "pages/exerciseDetail/exerciseDetail",
+    "pages/exerciseTimer/exerciseTimer",
+    "pages/exerciseHistory/exerciseHistory",
+    "pages/profile/profile",
+    "pages/exerciseCheckIn/exerciseCheckIn",
+    "pages/exerciseCheckIn/exerciseCheckInHistory",
+    "pages/exerciseCheckIn/exerciseCheckInDetails"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "健身打卡",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "待办事项"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

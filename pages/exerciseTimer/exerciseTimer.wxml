@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="exercise-name">{{exerciseName}}</view>
+  <view class="timer-container">
+    <!-- 计时器显示 -->
+    <text class="timer-display">{{minutes}}:{{seconds}}:{{milliseconds}}</text>
+    
+    <!-- 开始按钮 -->
+    <block wx:if="{{!isRunning}}">
+      <button class="start-btn" bindtap="startTimer">开始记录</button>
+    </block>
+    
+    <!-- 结束按钮 -->
+    <block wx:if="{{isRunning}}">
+      <button class="stop-btn" bindtap="showEndConfirm">结束</button>
+    </block>
+  </view>
+</view>

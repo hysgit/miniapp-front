@@ -1,0 +1,83 @@
+<view class="page">
+  <!-- 顶部标题栏 -->
+  <view class="header">
+    <text class="header-title">我的待办</text>
+    <view class="add-btn" bindtap="showAddTodoModal">
+      <text class="add-icon">+</text>
+      <text class="add-text">新建</text>
+    </view>
+  </view>
+
+  <!-- 待办事项列表 -->
+  <scroll-view scroll-y class="todo-list">
+    <block wx:if="{{todoList.length > 0}}">
+      <view class="todo-item {{item.status === 1 ? 'completed' : ''}}" 
+            wx:for="{{todoList}}" 
+            wx:key="id">
+        <view class="todo-content" bindtap="showTodoDetail" data-id="{{item.id}}">
+          <view class="checkbox" catchtap="toggleTodoStatus" data-id="{{item.id}}">
+            <icon class="checkbox-icon" type="{{item.status === 1 ? 'success' : 'circle'}}" size="20" color="{{item.status === 1 ? '#8e8e8e' : '#4CAF50'}}"/>
+          </view>
+          <view class="todo-info">
+            <view class="todo-title {{item.status === 1 ? 'completed-text' : ''}}">{{item.title}}</view>
+            <view class="todo-meta">
+              <view class="priority-tag priority-{{item.priority}}">
+                {{item.priority === 0 ? '普通' : item.priority === 1 ? '重要' : '紧急'}}
+              </view>
+              <text class="todo-date" wx:if="{{item.dueDate}}">{{item.dueDate}}</text>
+            </view>
+            <view class="todo-description" wx:if="{{item.description}}">{{item.description}}</view>
+          </view>
+        </view>
+        <view class="delete-btn" catchtap="deleteTodo" data-id="{{item.id}}">
+          <icon type="clear" size="16" color="#999"/>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="empty-state">
+      <image class="empty-image" src="/images/empty-todo.png" mode="aspectFit"></image>
+      <text class="empty-text">还没有待办事项，点击右上角添加</text>
+    </view>
+  </scroll-view>
+
+  <!-- 新增/编辑待办事项弹窗 -->
+  <view class="modal" wx:if="{{showModal}}">
+    <view class="modal-mask" bindtap="hideModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text>{{editingTodo ? '编辑待办事项' : '新建待办事项'}}</text>
+        <icon type="clear" size="20" bindtap="hideModal" color="#999"></icon>
+      </view>
+      <view class="modal-body">
+        <input class="input" 
+               placeholder="请输入标题" 
+               value="{{editingTodo.title}}"
+               bindinput="onTitleInput"/>
+        <textarea class="textarea" 
+                  placeholder="添加描述（选填）" 
+                  value="{{editingTodo.description}}"
+                  bindinput="onDescriptionInput"/>
+        <view class="form-item">
+          <text class="form-label">截止日期</text>
+          <picker mode="date" 
+                  value="{{editingTodo.dueDate}}" 
+                  bindchange="onDateChange">
+            <view class="picker-value">{{editingTodo.dueDate || '请选择'}}</view>
+          </picker>
+        </view>
+        <view class="form-item">
+          <text class="form-label">优先级</text>
+          <picker value="{{editingTodo.priority}}" 
+                  range="{{['普通', '重要', '紧急']}}" 
+                  bindchange="onPriorityChange">
+            <view class="picker-value">{{['普通', '重要', '紧急'][editingTodo.priority]}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="btn cancel" bindtap="hideModal">取消</button>
+        <button class="btn confirm" bindtap="saveTodo">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

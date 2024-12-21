@@ -1,0 +1,42 @@
+<view class="container">
+  <!-- 月份选择器 -->
+  <picker mode="date" fields="month" value="{{currentDate}}" bindchange="onMonthChange">
+    <view class="month-picker">
+      <text>{{currentYear}}年{{currentMonth}}月</text>
+      <text class="picker-arrow">▼</text>
+    </view>
+  </picker>
+
+  <!-- 月度统计 -->
+  <view class="monthly-stats">
+    <text>本月打卡总次数：{{monthlyTotal}}次</text>
+  </view>
+
+  <!-- 日历头部 - 星期 -->
+  <view class="calendar-header">
+    <view class="weekday" wx:for="{{['日','一','二','三','四','五','六']}}" wx:key="*this">
+      {{item}}
+    </view>
+  </view>
+
+  <!-- 日历主体 -->
+  <view class="calendar-body">
+    <view class="calendar-row" wx:for="{{calendarData}}" wx:for-item="row" wx:key="index">
+      <view class="calendar-cell {{day.isCurrentMonth ? '' : 'other-month'}} {{day.count > 0 ? 'has-record' : ''}}"
+            wx:for="{{row}}" 
+            wx:for-item="day" 
+            wx:key="id"
+            data-count="{{day.count >= 10 ? '10' : day.count}}"
+            data-date="{{day.date}}"
+            bindtap="{{day.count > 0 ? 'onDateClick' : ''}}">
+        <view class="cell-date">{{day.dayOfMonth}}</view>
+        <view class="cell-count" wx:if="{{day.isCurrentMonth}}">{{day.count}}次</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载中提示 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

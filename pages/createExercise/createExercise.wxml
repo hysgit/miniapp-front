@@ -1,0 +1,18 @@
+<view class="container">
+  <view class="form-item">
+    <text class="label">运动名称</text>
+    <input class="input" placeholder="请输入运动名称" value="{{name}}" bindinput="onNameInput" />
+  </view>
+
+  <view class="form-item">
+    <text class="label">运动类型</text>
+    <radio-group class="type-group" bindchange="onTypeChange">
+      <label class="type-item" wx:for="{{types}}" wx:key="id">
+        <radio value="{{item.id}}" checked="{{selectedType === item.id}}" />
+        <text>{{item.name}}</text>
+      </label>
+    </radio-group>
+  </view>
+
+  <button class="submit-btn" bindtap="createExercise">创建</button>
+</view>
