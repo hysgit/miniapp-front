@@ -32,6 +32,7 @@ Page({
   // 显示添加待办事项弹窗
   showAddTodoModal() {
     console.log('showAddTodoModal called');
+    console.log('showModal before setData:', this.data.showModal);
     this.setData({
       showModal: true,
       editingTodo: {
@@ -40,7 +41,12 @@ Page({
         dueDate: '',
         priority: 0
       }
-    })
+    }, () => {
+      console.log('showModal after setData:', this.data.showModal);
+      if (this.data.showModal) {
+        console.log('Modal should be visible now.');
+      }
+    });
   },
 
   // 显示待办事项详情
@@ -51,7 +57,12 @@ Page({
       this.setData({
         showModal: true,
         editingTodo: { ...todo }
-      })
+      }, () => {
+        console.log('showModal after setData:', this.data.showModal);
+        if (this.data.showModal) {
+          console.log('Modal should be visible now.');
+        }
+      });
     }
   },
 

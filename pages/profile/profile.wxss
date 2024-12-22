@@ -264,9 +264,12 @@
   transform: translate(-50%, -50%);
   background-color: white;
   z-index: 100;
-  width: 80%;
+  width: 90%;
+  max-height: 80vh;
   border-radius: 10rpx;
   box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  display: block;
 }
 
 .modal-mask {
@@ -290,11 +293,9 @@
   right: 0;
   background-color: white;
   border-radius: 24rpx 24rpx 0 0;
-  padding: 20rpx;
-  max-height: 70vh;
-  overflow-y: auto;
-  transform: translateY(100%);
-  transition: transform 0.3s ease;
+  padding: 10rpx 20rpx;
+  max-height: 80vh;
+  overflow-y: hidden;
 }
 
 .modal.show .modal-content {
@@ -326,6 +327,8 @@
 }
 
 .modal-body {
+  overflow-y: auto;
+  max-height: 60vh;
   display: flex;
   flex-direction: column;
   gap: 20rpx;
@@ -381,9 +384,16 @@
 }
 
 .modal-footer {
-  margin-top: 40rpx;
   display: flex;
-  gap: 20rpx;
+  justify-content: space-between;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #eee;
+  margin-top: 20rpx;
+}
+
+.button {
+  flex: 1;
+  margin: 0 10rpx;
 }
 
 .button {
