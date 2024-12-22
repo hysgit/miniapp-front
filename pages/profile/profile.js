@@ -31,6 +31,7 @@ Page({
 
   // 显示添加待办事项弹窗
   showAddTodoModal() {
+    console.log('showAddTodoModal called');
     this.setData({
       showModal: true,
       editingTodo: {
