@@ -3,8 +3,7 @@
   <view class="header">
     <text class="header-title">我的待办</text>
     <view class="add-btn" bindtap="showAddTodoModal">
-      <text class="add-icon">+</text>
-      <text class="add-text">新建</text>
+      <text class="add-icon">+ 新建</text>
     </view>
   </view>
 

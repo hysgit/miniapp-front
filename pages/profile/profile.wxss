@@ -46,10 +46,10 @@
 }
 
 .add-btn {
-  width: 80rpx;
-  height: 80rpx;
+  width: auto;
+  padding: 0 10rpx;
   background-color: white;
-  border-radius: 50%;
+  border-radius: 8rpx;
   display: flex;
   align-items: center;
   justify-content: center;
