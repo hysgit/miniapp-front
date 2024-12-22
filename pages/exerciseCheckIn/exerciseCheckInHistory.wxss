@@ -87,7 +87,7 @@
 
 .cell-count {
   font-size: 24rpx;
-  color: #666;
+  color: blue;
 }
 
 .other-month {
