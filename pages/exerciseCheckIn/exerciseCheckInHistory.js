@@ -143,7 +143,8 @@ Page({
       // 找出当天的所有记录
       const dayRecords = records.filter(r => {
         const recordDate = new Date(r.recordTime);
-        recordDate.setMinutes(recordDate.getMinutes() + recordDate.getTimezoneOffset());
+        // recordDate.setMinutes(recordDate.getMinutes() + recordDate.getTimezoneOffset());
+        recordDate.setMinutes(recordDate.getMinutes());
         return recordDate.getDate() === day;
       });
       
