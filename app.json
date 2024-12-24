@@ -9,23 +9,28 @@
     "pages/profile/profile",
     "pages/exerciseCheckIn/exerciseCheckIn",
     "pages/exerciseCheckIn/exerciseCheckInHistory",
-    "pages/exerciseCheckIn/exerciseCheckInDetails"
+    "pages/exerciseCheckIn/exerciseCheckInDetails",
+    "pages/countdown/countdown"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "健身打卡",
+    "navigationBarTitleText": "我的工具",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页"
+        "text": "打卡"
       },
       {
         "pagePath": "pages/profile/profile",
         "text": "待办事项"
+      },
+      {
+        "pagePath": "pages/countdown/countdown",
+        "text": "倒计时"
       }
     ]
   },
