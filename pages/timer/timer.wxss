@@ -35,19 +35,41 @@
 
 .timer-info {
   display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.timer-header {
+  display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .timer-name {
-  font-size: 16px;
+  font-size: 34rpx;
+  color: #333;
   font-weight: 500;
 }
 
-.timer-duration {
-  font-size: 16px;
+.timer-current {
+  font-size: 32rpx;
   color: #666;
-  font-family: monospace;
+}
+
+.timer-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.timer-duration, .timer-max-duration {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.timer-max-duration {
+  font-size: 30rpx;
+  color: #0066cc;
 }
 
 .modal {

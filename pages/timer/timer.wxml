@@ -2,8 +2,11 @@
   <view class="create-btn" bindtap="showCreateModal">创建计时器</view>
   <view wx:for="{{timers}}" wx:key="id" class="timer-item" bindtap="goToDetail" data-id="{{item.id}}">
     <view class="timer-info">
-      <text class="timer-name">{{item.name}}</text>
-      <text class="timer-duration" wx:if="{{item.duration}}">{{item.duration}}</text>
+      <view class="timer-header">
+        <text class="timer-name">{{item.name}}</text>
+        <text class="timer-current" wx:if="{{item.duration}}">{{item.duration}}</text>
+      </view>
+      <text class="timer-max-duration" wx:if="{{item.maxDuration}}">历史最长：{{item.maxDuration}}</text>
     </view>
   </view>
 

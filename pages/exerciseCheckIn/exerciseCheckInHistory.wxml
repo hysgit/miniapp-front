@@ -1,14 +1,18 @@
 <view class="container">
   <!-- 月份选择器 -->
   <view class="month-selector">
-    <view class="month-btn" bindtap="onPrevMonth">◀</view>
+    <view class="month-btn" hover-class="month-btn-hover" bindtap="onPrevMonth">
+      <text class="arrow-text">←</text>
+    </view>
     <picker mode="date" fields="month" value="{{currentDate}}" bindchange="onMonthChange">
       <view class="month-picker">
         <text>{{currentYear}}年{{currentMonth}}月</text>
         <text class="picker-arrow">▼</text>
       </view>
     </picker>
-    <view class="month-btn" bindtap="onNextMonth">▶</view>
+    <view class="month-btn" hover-class="month-btn-hover" bindtap="onNextMonth">
+      <text class="arrow-text">→</text>
+    </view>
   </view>
 
   <!-- 月度统计 -->
