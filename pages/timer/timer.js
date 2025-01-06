@@ -8,6 +8,9 @@ Page({
 
   onLoad: function() {
     this.fetchTimerList();
+    wx.setNavigationBarTitle({
+      title: '计时器'
+    });
   },
 
   onShow: function() {

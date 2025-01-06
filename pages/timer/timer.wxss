@@ -7,20 +7,30 @@
   padding-top: 20px;
 }
 
-button {
-  position: sticky;
-  top: 0;
-  margin: 10px;
-  z-index: 10;
+.create-btn {
+  width: 90%;
+  margin: 10px auto;
+  background-color: #07C160;
+  color: white;
+  border-radius: 4px;
+  padding: 12px 0;
+  font-size: 16px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.create-btn:active {
+  opacity: 0.8;
 }
 
 .timer-item {
   margin-top: 10px;
   padding: 15px;
-  width: 90%;
   background: #fff;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin: 10px 15px;
+  width: 90%;
 }
 
 .timer-info {
@@ -55,7 +65,7 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
@@ -65,14 +75,15 @@ button {
   transform: translate(-50%, -50%);
   width: 80%;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
 .modal-header {
   padding: 15px;
   text-align: center;
-  font-size: 16px;
+  font-size: 17px;
+  font-weight: 500;
   border-bottom: 1px solid #eee;
 }
 
@@ -86,16 +97,27 @@ button {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 0 10px;
+  font-size: 16px;
 }
 
 .modal-footer {
   display: flex;
-  padding: 10px;
   border-top: 1px solid #eee;
 }
 
-.modal-footer button {
+.modal-btn {
   flex: 1;
-  margin: 0 5px;
-  position: static;
+  padding: 12px 0;
+  text-align: center;
+  font-size: 16px;
+}
+
+.modal-btn-cancel {
+  color: #333;
+  border-right: 1px solid #eee;
+}
+
+.modal-btn-confirm {
+  color: #07C160;
+  font-weight: 500;
 }

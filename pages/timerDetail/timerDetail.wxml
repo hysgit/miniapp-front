@@ -9,7 +9,7 @@
         </view>
         <view class="duration">
           <text>{{item.duration}}</text>
-          <button wx:if="{{!item.stopTime}}" class="stop-btn" bindtap="showStopConfirm" data-id="{{item.id}}">结束计时</button>
+          <view wx:if="{{!item.stopTime}}" class="stop-btn" bindtap="showStopConfirm" data-id="{{item.id}}">结束计时</view>
         </view>
       </view>
     </view>
@@ -19,13 +19,10 @@
   <view class="modal" wx:if="{{showConfirmModal}}">
     <view class="modal-mask"></view>
     <view class="modal-content">
-      <view class="modal-header">确认结束计时</view>
-      <view class="modal-body">
-        <text>是否结束本次计时并开始新的计时？</text>
-      </view>
+      <view class="modal-body">确定要结束计时吗？</view>
       <view class="modal-footer">
-        <button bindtap="hideModal">取消</button>
-        <button bindtap="confirmStop" type="primary">确定</button>
+        <view class="modal-btn modal-btn-cancel" bindtap="hideStopConfirm">取消</view>
+        <view class="modal-btn modal-btn-confirm" bindtap="stopTimer">确定</view>
       </view>
     </view>
   </view>
