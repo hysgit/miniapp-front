@@ -1,12 +1,12 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/exercise/exercise",
     "pages/login/login",
     "pages/createExercise/createExercise",
     "pages/exerciseDetail/exerciseDetail",
     "pages/exerciseTimer/exerciseTimer",
     "pages/exerciseHistory/exerciseHistory",
-    "pages/profile/profile",
+    "pages/todoist/todoist",
     "pages/exerciseCheckIn/exerciseCheckIn",
     "pages/exerciseCheckIn/exerciseCheckInHistory",
     "pages/exerciseCheckIn/exerciseCheckInDetails",
@@ -24,11 +24,11 @@
   "tabBar": {
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/exercise/exercise",
         "text": "打卡"
       },
       {
-        "pagePath": "pages/profile/profile",
+        "pagePath": "pages/todoist/todoist",
         "text": "待办事项"
       },
       {
