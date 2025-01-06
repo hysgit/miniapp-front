@@ -62,15 +62,50 @@ Page({
       },
       // 请求成功的回调
       success: (res) => {
-        wx.hideLoading();  // 隐藏加载提示
         if (res.data.code === 0) {
-          // 保存成功，显示成功提示
-          wx.showToast({
-            title: '打卡成功',
-            icon: 'success'
-          });
+          // 如果是id=2的打卡型运动项目，处理定时器
+          if (parseInt(this.data.exerciseId) === 2) {
+            // 停止id=1的定时器并创建新记录
+            wx.request({
+              url: `${app.globalData.baseUrl}/timer/timer-record/stop-and-create`,
+              method: 'POST',
+              header: {
+                'content-type': 'application/json'
+              },
+              data: {
+                timerId: 1
+              },
+              success: (timerRes) => {
+                wx.hideLoading();
+                if (timerRes.data.code === 0) {
+                  wx.showToast({
+                    title: '打卡成功',
+                    icon: 'success'
+                  });
+                } else {
+                  wx.showToast({
+                    title: timerRes.data.message || '定时器操作失败',
+                    icon: 'none'
+                  });
+                }
+              },
+              fail: () => {
+                wx.hideLoading();
+                wx.showToast({
+                  title: '定时器操作失败',
+                  icon: 'none'
+                });
+              }
+            });
+          } else {
+            wx.hideLoading();
+            wx.showToast({
+              title: '打卡成功',
+              icon: 'success'
+            });
+          }
         } else {
-          // 保存失败，显示错误信息
+          wx.hideLoading();
           wx.showToast({
             title: res.data.message || '打卡失败',
             icon: 'none'
@@ -79,8 +114,7 @@ Page({
       },
       // 请求失败的回调
       fail: () => {
-        wx.hideLoading();  // 隐藏加载提示
-        // 显示网络错误提示
+        wx.hideLoading();
         wx.showToast({
           title: '网络错误，请重试',
           icon: 'none'

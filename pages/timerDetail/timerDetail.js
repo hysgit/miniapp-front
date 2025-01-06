@@ -24,9 +24,6 @@ Page({
     wx.request({
       url: `${getApp().globalData.baseUrl}/timer/detail/${this.data.timerId}`,
       method: 'GET',
-      header: {
-        'Authorization': `Bearer ${wx.getStorageSync('token')}`
-      },
       success: (res) => {
         // 分别存储计算用的时间和显示用的时间
         const records = res.data.records.map(record => ({
@@ -34,7 +31,8 @@ Page({
           startTime: this.formatDateTime(record.startTime),
           stopTime: this.formatDateTime(record.stopTime),
           displayStartTime: this.formatDisplayDateTime(record.startTime),
-          displayStopTime: this.formatDisplayDateTime(record.stopTime)
+          displayStopTime: this.formatDisplayDateTime(record.stopTime),
+          duration: record.stopTime ? this.calculateDuration(record.startTime, record.stopTime) : ''
         }));
 
         this.setData({
