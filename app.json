@@ -7,6 +7,7 @@
     "pages/exerciseTimer/exerciseTimer",
     "pages/exerciseHistory/exerciseHistory",
     "pages/todoist/todoist",
+    "pages/todoItem/todoItem",
     "pages/exerciseCheckIn/exerciseCheckIn",
     "pages/exerciseCheckIn/exerciseCheckInHistory",
     "pages/exerciseCheckIn/exerciseCheckInDetails",

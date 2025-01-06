@@ -1,6 +1,6 @@
 App({
   globalData: {
-    baseUrl: 'https://miniapp.woslx.com/', // 开发测试地址
+    baseUrl: 'https://miniapp.woslx.com', // 开发测试地址
     token: null,
     loginPromise: null, // 存储登录Promise
     isLoginning: false // 标记是否正在登录中

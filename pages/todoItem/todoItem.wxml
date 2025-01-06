@@ -1,0 +1,221 @@
+<view class="container">
+  <view class="form-group">
+    <view class="form-item">
+      <text class="label">标题</text>
+      <input class="input" 
+             placeholder="请输入标题" 
+             value="{{todoItem.title}}"
+             bindinput="onTitleInput"/>
+    </view>
+
+    <view class="form-item">
+      <text class="label">描述</text>
+      <textarea class="textarea" 
+                placeholder="请输入描述" 
+                value="{{todoItem.description}}"
+                bindinput="onDescriptionInput"/>
+    </view>
+
+    <view class="form-item">
+      <text class="label">分类</text>
+      <picker mode="selector" 
+              range="{{categories}}" 
+              value="{{categories.indexOf(todoItem.category)}}"
+              bindchange="onCategoryChange">
+        <view class="picker {{todoItem.category ? '' : 'placeholder'}}">
+          {{todoItem.category || '请选择分类'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">优先级</text>
+      <picker mode="selector" 
+              range="{{['普通', '重要']}}" 
+              value="{{todoItem.priority}}"
+              bindchange="onPriorityChange">
+        <view class="picker">
+          {{todoItem.priority === 0 ? '普通' : '重要'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">截止日期</text>
+      <view class="datetime-picker">
+        <picker mode="date" 
+                value="{{todoItem.dueDate}}"
+                start="2024-01-01"
+                end="2030-12-31"
+                bindchange="onDateChange">
+          <view class="picker {{todoItem.dueDate ? '' : 'placeholder'}}">
+            {{todoItem.dueDate || '选择日期'}}
+          </view>
+        </picker>
+        <picker mode="time" 
+                value="{{todoItem.dueTime}}"
+                bindchange="onTimeChange">
+          <view class="picker {{todoItem.dueTime ? '' : 'placeholder'}}">
+            {{todoItem.dueTime || '选择时间'}}
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="label">开启提醒</text>
+      <switch checked="{{todoItem.reminder}}"
+              bindchange="onReminderChange"
+              color="#0066cc"/>
+    </view>
+
+    <block wx:if="{{todoItem.reminder}}">
+      <view class="form-item">
+        <text class="label">提醒时间</text>
+        <view class="picker {{todoItem.reminderTime ? '' : 'placeholder'}}"
+              bindtap="onTimePickerShow"
+              data-type="reminderTime">
+          {{todoItem.reminderTime || '请选择时间'}}
+        </view>
+      </view>
+
+      <view class="form-item">
+        <text class="label">重复</text>
+        <picker mode="selector" 
+                range="{{repeatOptions}}"
+                range-key="label"
+                value="{{repeatIndex}}"
+                bindchange="onRepeatChange">
+          <view class="picker">
+            {{repeatOptions[repeatIndex].label}}
+          </view>
+        </picker>
+      </view>
+    </block>
+  </view>
+
+  <!-- 标签部分 -->
+  <view class="form-group">
+    <view class="section-title">
+      <text>标签</text>
+      <text class="add-btn" bindtap="showTagInput">添加</text>
+    </view>
+
+    <view class="tags-container">
+      <view class="tag" 
+            wx:for="{{todoItem.tags}}" 
+            wx:key="*this">
+        {{item}}
+        <text class="tag-delete" 
+              bindtap="removeTag" 
+              data-index="{{index}}">×</text>
+      </view>
+    </view>
+
+    <view class="tag-input" wx:if="{{showTagInput}}">
+      <input class="input" 
+             placeholder="请输入标签" 
+             value="{{newTag}}"
+             bindinput="onTagInput"
+             bindconfirm="addTag"/>
+    </view>
+
+    <view class="common-tags">
+      <text class="label">常用标签：</text>
+      <view class="tags-container">
+        <view class="tag common-tag"
+              wx:for="{{commonTags}}"
+              wx:key="*this"
+              bindtap="selectCommonTag"
+              data-tag="{{item}}">
+          {{item}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 附件部分 -->
+  <view class="form-group">
+    <view class="section-title">
+      <text>附件</text>
+      <text class="add-btn" bindtap="chooseAttachment">添加</text>
+    </view>
+
+    <view class="attachments-list">
+      <view class="attachment-item"
+            wx:for="{{todoItem.attachments}}"
+            wx:key="url">
+        <view class="attachment-info">
+          <text class="attachment-name">{{item.name}}</text>
+          <text class="attachment-size">{{item.sizeText}}</text>
+        </view>
+        <text class="delete-btn"
+              bindtap="removeAttachment"
+              data-index="{{index}}">删除</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 评论部分 -->
+  <view class="form-group">
+    <view class="section-title">
+      <text>评论</text>
+      <text class="add-btn" bindtap="showCommentInput">添加</text>
+    </view>
+
+    <view class="comments-list">
+      <view class="comment-item"
+            wx:for="{{todoItem.comments}}"
+            wx:key="time">
+        <view class="comment-header">
+          <text class="comment-user">{{item.user.nickName}}</text>
+          <text class="comment-time">{{item.time}}</text>
+        </view>
+        <view class="comment-content">{{item.content}}</view>
+        <text class="delete-btn"
+              bindtap="removeComment"
+              data-index="{{index}}">删除</text>
+      </view>
+    </view>
+
+    <view class="comment-input" wx:if="{{showCommentInput}}">
+      <textarea class="textarea"
+                placeholder="请输入评论"
+                value="{{newComment}}"
+                bindinput="onCommentInput"/>
+      <button class="btn btn-primary" 
+              bindtap="addComment">
+        发表评论
+      </button>
+    </view>
+  </view>
+
+  <view class="button-group">
+    <button class="btn btn-primary" bindtap="saveTodoItem">保存</button>
+  </view>
+</view>
+
+<!-- 时间选择器 -->
+<view class="popup-mask" wx:if="{{showTimePicker}}" bindtap="onTimePickerClose"></view>
+<view class="popup-content {{showTimePicker ? 'popup-show' : ''}}" wx:if="{{showTimePicker}}">
+  <view class="popup-header">
+    <text>选择时间</text>
+    <text class="close-btn" bindtap="onTimePickerClose">×</text>
+  </view>
+  <view class="time-picker-container">
+    <picker-view indicator-style="height: 50px;"
+                 value="{{[hours, minutes]}}"
+                 bindchange="onTimePickerConfirm">
+      <picker-view-column>
+        <view wx:for="{{24}}" wx:key="*this" class="picker-item">
+          {{item < 10 ? '0' + item : item}}
+        </view>
+      </picker-view-column>
+      <picker-view-column>
+        <view wx:for="{{60}}" wx:key="*this" class="picker-item">
+          {{item < 10 ? '0' + item : item}}
+        </view>
+      </picker-view-column>
+    </picker-view>
+  </view>
+</view>
