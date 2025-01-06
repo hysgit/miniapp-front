@@ -1,6 +1,67 @@
 <view class="container">
-  <view class="button-container">
-    <button bindtap="onAddButtonTap">新增</button>
+  <view class="nav-buttons">
+    <view class="nav-button {{activeTab === 'ongoing' ? 'active' : ''}}" bindtap="switchTab" data-tab="ongoing">
+      <text>进行中</text>
+    </view>
+    <view class="nav-button {{activeTab === 'completed' ? 'active' : ''}}" bindtap="switchTab" data-tab="completed">
+      <text>已完成</text>
+    </view>
   </view>
-  <text>倒计时页面</text>
+  
+  <view class="content-container">
+    <view wx:if="{{activeTab === 'ongoing'}}" class="ongoing-container">
+      <view class="countdown-list">
+        <view class="countdown-item" wx:for="{{countdowns}}" wx:key="id">
+          <view class="countdown-header">
+            <view class="countdown-info">
+              <text class="countdown-name">{{item.name}}</text>
+              <text class="countdown-type">{{countdownTypes[item.countdownType-1]}}</text>
+            </view>
+            <view class="countdown-actions">
+              <text class="action-btn complete" bindtap="onCompleteCountdown" data-id="{{item.id}}">完成</text>
+              <text class="action-btn delete" bindtap="onDeleteCountdown" data-id="{{item.id}}">删除</text>
+            </view>
+          </view>
+          <view class="countdown-times">
+            <view class="time-item">
+              <text class="time-label">剩余时间</text>
+              <text class="time-value">{{item.remainingTime}}</text>
+            </view>
+            <view class="time-item end-time">
+              <text class="time-label">结束时间</text>
+              <text class="time-value">{{item.formattedEndTime}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="add-btn" bindtap="onAddCountdown">
+        <view class="btn-content">创建倒计时</view>
+      </view>
+    </view>
+    <view wx:if="{{activeTab === 'completed'}}" class="completed-container">
+      <view class="countdown-list">
+        <view class="countdown-item" wx:for="{{countdowns}}" wx:key="id">
+          <view class="countdown-header">
+            <view class="countdown-info">
+              <text class="countdown-name">{{item.name}}</text>
+              <text class="countdown-type">{{countdownTypes[item.countdownType-1]}}</text>
+            </view>
+            <view class="countdown-actions">
+              <text class="action-btn delete" bindtap="onDeleteCountdown" data-id="{{item.id}}">删除</text>
+            </view>
+          </view>
+          <view class="countdown-times">
+            <view class="time-item">
+              <text class="time-label">完成时间</text>
+              <text class="time-value">{{item.formattedCompleteTime}}</text>
+            </view>
+            <view class="time-item end-time">
+              <text class="time-label">结束时间</text>
+              <text class="time-value">{{item.formattedEndTime}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

@@ -1,9 +1,8 @@
 /* 样式文件 */
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  padding: 0;
+  background-color: #f5f5f5;
+  min-height: 100vh;
 }
 
 text {
@@ -24,4 +23,159 @@ button {
   padding: 10px 20px;
   border-radius: 5px;
   font-size: 16px;
+}
+
+.nav-buttons {
+  display: flex;
+  background-color: #fff;
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.nav-button {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+
+.nav-button.active {
+  color: #0066cc;
+  font-weight: 500;
+}
+
+.nav-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -20rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background-color: #0066cc;
+  border-radius: 2rpx;
+}
+
+.content-container {
+  padding: 30rpx;
+}
+
+.countdown-list {
+  margin-bottom: 30rpx;
+}
+
+.countdown-item {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.countdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.countdown-info {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.countdown-name {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.countdown-type {
+  font-size: 24rpx;
+  color: #666;
+  background-color: #f5f5f5;
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+}
+
+.countdown-times {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.time-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.time-value {
+  font-size: 28rpx;
+  color: #0066cc;
+  font-weight: 500;
+}
+
+.countdown-actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.action-btn {
+  font-size: 26rpx;
+  padding: 6rpx 20rpx;
+  border-radius: 24rpx;
+  border: 1rpx solid #ddd;
+}
+
+.action-btn.complete {
+  color: #0066cc;
+  border-color: #0066cc;
+}
+
+.action-btn.delete {
+  color: #ff4d4f;
+  border-color: #ff4d4f;
+}
+
+.add-btn {
+  background-color: #0066cc;
+  border-radius: 12rpx;
+  margin-top: 30rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.add-btn .btn-content {
+  color: #fff;
+  font-size: 32rpx;
+  line-height: 1;
+}
+
+.add-icon {
+  font-size: 32rpx;
+  color: #fff;
+  margin-right: 12rpx;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.add-btn text:last-child {
+  font-size: 28rpx;
+  color: #fff;
+  line-height: 1;
+  display: flex;
+  align-items: center;
 }

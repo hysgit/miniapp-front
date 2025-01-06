@@ -8,6 +8,9 @@ Page({
 
   onLoad() {
     this.fetchTodoList()
+    wx.setNavigationBarTitle({
+      title: '待办事项'
+    });
   },
 
   onShow() {

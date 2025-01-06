@@ -1,0 +1,34 @@
+<view class="container">
+  <view class="form-group">
+    <text class="label">倒计时名称</text>
+    <input class="input" type="text" placeholder="请输入名称" model:value="{{name}}" />
+  </view>
+
+  <view class="form-group">
+    <text class="label">倒计时类型</text>
+    <picker bindchange="onTypeChange" value="{{typeIndex}}" range="{{typeOptions}}">
+      <view class="picker">
+        <text>{{typeOptions[typeIndex]}}</text>
+        <text class="picker-arrow">▼</text>
+      </view>
+    </picker>
+  </view>
+
+  <view class="form-group">
+    <text class="label">结束时间</text>
+    <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange">
+      <view class="picker">
+        <text>{{endDate}}</text>
+        <text class="picker-arrow">▼</text>
+      </view>
+    </picker>
+    <picker mode="time" value="{{endTime}}" bindchange="onEndTimeChange">
+      <view class="picker">
+        <text>{{endTime}}</text>
+        <text class="picker-arrow">▼</text>
+      </view>
+    </picker>
+  </view>
+
+  <button class="submit-btn" bindtap="onSubmit">创建倒计时</button>
+</view>

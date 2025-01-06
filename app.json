@@ -11,13 +11,14 @@
     "pages/exerciseCheckIn/exerciseCheckInHistory",
     "pages/exerciseCheckIn/exerciseCheckInDetails",
     "pages/countdown/countdown",
+    "pages/countdown/createCountdown",
     "pages/timer/timer",
     "pages/timerDetail/timerDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "我的工具",
+    "navigationBarTitleText": "打卡",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
