@@ -21,8 +21,8 @@
     <view class="modal-content">
       <view class="modal-body">确定要结束计时吗？</view>
       <view class="modal-footer">
-        <view class="modal-btn modal-btn-cancel" bindtap="hideStopConfirm">取消</view>
-        <view class="modal-btn modal-btn-confirm" bindtap="stopTimer">确定</view>
+        <view class="modal-btn modal-btn-cancel" bindtap="hideModal">取消</view>
+        <view class="modal-btn modal-btn-confirm" bindtap="confirmStop">确定</view>
       </view>
     </view>
   </view>

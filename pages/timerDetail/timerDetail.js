@@ -129,11 +129,8 @@ Page({
 
   confirmStop: function() {
     wx.request({
-      url: `${getApp().globalData.baseUrl}/timer/record/stop/${this.data.currentRecordId}`,
+      url: `${getApp().globalData.baseUrl}/timer/timer-record/stop/${this.data.currentRecordId}`,
       method: 'POST',
-      header: {
-        'Authorization': `Bearer ${wx.getStorageSync('token')}`
-      },
       success: (res) => {
         this.hideModal();
         this.fetchTimerDetail();
