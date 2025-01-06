@@ -9,7 +9,7 @@
         </view>
         <view class="duration">
           <text>{{item.duration}}</text>
-          <view wx:if="{{!item.stopTime}}" class="stop-btn" bindtap="showStopConfirm" data-id="{{item.id}}">结束计时</view>
+          <view wx:if="{{!item.stopTime && timer.id != 1}}" class="stop-btn" bindtap="showStopConfirm" data-id="{{item.id}}">结束计时</view>
         </view>
       </view>
     </view>
