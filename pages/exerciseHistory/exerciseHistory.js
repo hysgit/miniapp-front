@@ -157,5 +157,33 @@ Page({
     });
 
     return calendar;
-  }
+  },
+
+  // 切换到上一个月
+  onPrevMonth() {
+    const date = new Date(this.data.currentMonth);
+    date.setMonth(date.getMonth() - 1);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const currentMonth = `${year}-${month}`;
+
+    this.setData({
+      currentMonth: currentMonth
+    });
+    this.fetchMonthlyRecords(currentMonth);
+  },
+
+  // 切换到下一个月
+  onNextMonth() {
+    const date = new Date(this.data.currentMonth);
+    date.setMonth(date.getMonth() + 1);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const currentMonth = `${year}-${month}`;
+
+    this.setData({
+      currentMonth: currentMonth
+    });
+    this.fetchMonthlyRecords(currentMonth);
+  },
 });

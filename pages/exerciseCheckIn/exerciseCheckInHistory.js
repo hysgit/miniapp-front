@@ -109,6 +109,40 @@ Page({
     }
   },
 
+  // 切换到上一个月
+  onPrevMonth() {
+    const date = new Date(this.data.currentDate);
+    date.setMonth(date.getMonth() - 1);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const currentMonth = `${year}-${month}`;
+
+    this.setData({
+      currentDate: currentMonth,
+      currentYear: year,
+      currentMonth: month
+    });
+
+    this.loadMonthlyRecords(currentMonth);
+  },
+
+  // 切换到下一个月
+  onNextMonth() {
+    const date = new Date(this.data.currentDate);
+    date.setMonth(date.getMonth() + 1);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const currentMonth = `${year}-${month}`;
+
+    this.setData({
+      currentDate: currentMonth,
+      currentYear: year,
+      currentMonth: month
+    });
+
+    this.loadMonthlyRecords(currentMonth);
+  },
+
   // 生成日历数据
   generateCalendarData(month, records) {
     const [year, monthStr] = month.split('-');

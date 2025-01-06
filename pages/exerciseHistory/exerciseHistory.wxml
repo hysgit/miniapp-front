@@ -1,11 +1,15 @@
 <!-- 容器 -->
 <view class="container">
   <!-- 月份选择器 -->
-  <picker mode="date" fields="month" value="{{currentMonth}}" bindchange="onMonthChange">
-    <view class="month-picker">
-      <text>{{currentMonth}}</text>
-    </view>
-  </picker>
+  <view class="month-selector">
+    <view class="month-btn" bindtap="onPrevMonth">◀</view>
+    <picker mode="date" fields="month" value="{{currentMonth}}" bindchange="onMonthChange">
+      <view class="month-picker">
+        <text>{{currentMonth}}</text>
+      </view>
+    </picker>
+    <view class="month-btn" bindtap="onNextMonth">▶</view>
+  </view>
 
   <!-- 记录列表 -->
   <view class="record-list">
