@@ -1,9 +1,5 @@
 App({
   globalData: {
-    userInfo: null,
-    hasUserInfo: false,
-    exercises: [],
-    // baseUrl: 'http://116.62.150.127:18017', // 开发测试地址
     baseUrl: 'https://miniapp.woslx.com/', // 开发测试地址
     token: null,
     loginPromise: null, // 存储登录Promise
@@ -11,7 +7,6 @@ App({
   },
 
   onLaunch() {
-    // 检查本地登录状态
     this.checkLocalLoginState()
   },
 

@@ -1,0 +1,24 @@
+<view class="container">
+  <button bindtap="showCreateModal">创建计时器</button>
+  <view wx:for="{{timers}}" wx:key="id" class="timer-item" bindtap="goToDetail" data-id="{{item.id}}">
+    <view class="timer-info">
+      <text class="timer-name">{{item.name}}</text>
+      <text class="timer-duration" wx:if="{{item.duration}}">{{item.duration}}</text>
+    </view>
+  </view>
+
+  <!-- 创建定时器弹窗 -->
+  <view class="modal" wx:if="{{showModal}}">
+    <view class="modal-mask"></view>
+    <view class="modal-content">
+      <view class="modal-header">创建计时器</view>
+      <view class="modal-body">
+        <input type="text" placeholder="请输入定时器名称" bindinput="onNameInput" value="{{timerName}}" />
+      </view>
+      <view class="modal-footer">
+        <button bindtap="hideModal">取消</button>
+        <button bindtap="createTimer" type="primary">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,3 +1,6 @@
 <view class="container">
+  <view class="button-container">
+    <button bindtap="onAddButtonTap">新增</button>
+  </view>
   <text>倒计时页面</text>
 </view>

@@ -79,5 +79,14 @@ Page({
         url: `/pages/exerciseDetail/exerciseDetail?id=${id}&name=${name}`
       });
     }
+  },
+
+  goToDetail(e) {
+    const { id, name } = e.currentTarget.dataset;
+    if (id) {
+      wx.navigateTo({
+        url: `/pages/exerciseDetail/exerciseDetail?id=${id}&name=${name}`
+      });
+    }
   }
 })

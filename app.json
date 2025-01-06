@@ -10,7 +10,9 @@
     "pages/exerciseCheckIn/exerciseCheckIn",
     "pages/exerciseCheckIn/exerciseCheckInHistory",
     "pages/exerciseCheckIn/exerciseCheckInDetails",
-    "pages/countdown/countdown"
+    "pages/countdown/countdown",
+    "pages/timer/timer",
+    "pages/timerDetail/timerDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -31,6 +33,10 @@
       {
         "pagePath": "pages/countdown/countdown",
         "text": "倒计时"
+      },
+      {
+        "pagePath": "pages/timer/timer",
+        "text": "计时器"
       }
     ]
   },

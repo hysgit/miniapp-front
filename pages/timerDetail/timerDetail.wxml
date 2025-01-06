@@ -1,0 +1,32 @@
+<view class="container">
+  <view class="timer-name">{{timer.name}}</view>
+  <view class="record-list">
+    <view wx:for="{{records}}" wx:key="id" class="record-item">
+      <view class="record-info">
+        <view class="time-info">
+          <text>开始：{{item.displayStartTime}}</text>
+          <text wx:if="{{item.displayStopTime}}">结束：{{item.displayStopTime}}</text>
+        </view>
+        <view class="duration">
+          <text>{{item.duration}}</text>
+          <button wx:if="{{!item.stopTime}}" class="stop-btn" bindtap="showStopConfirm" data-id="{{item.id}}">结束计时</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 确认结束计时弹窗 -->
+  <view class="modal" wx:if="{{showConfirmModal}}">
+    <view class="modal-mask"></view>
+    <view class="modal-content">
+      <view class="modal-header">确认结束计时</view>
+      <view class="modal-body">
+        <text>是否结束本次计时并开始新的计时？</text>
+      </view>
+      <view class="modal-footer">
+        <button bindtap="hideModal">取消</button>
+        <button bindtap="confirmStop" type="primary">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
