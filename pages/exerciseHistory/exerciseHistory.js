@@ -75,9 +75,15 @@ Page({
     for (let day = 1; day <= daysInMonth; day++) {
       const date = String(day).padStart(2, '0');  
       const dayRecords = records.filter(r => {
-        const recordDate = new Date(r.recordTime);
+        // 将日期字符串转换为iOS兼容格式 "yyyy-MM-ddTHH:mm:ss"
+        const recordTimeStr = r.recordTime.replace(' ', 'T');
+        const recordDate = new Date(recordTimeStr);
         return recordDate.getDate() === day;
-      }).sort((a, b) => new Date(a.recordTime) - new Date(b.recordTime));
+      }).sort((a, b) => {
+        const timeA = a.recordTime.replace(' ', 'T');
+        const timeB = b.recordTime.replace(' ', 'T');
+        return new Date(timeA) - new Date(timeB);
+      });
 
       // 计算总时长
       const totalSeconds = dayRecords.reduce((sum, record) => sum + record.value, 0);

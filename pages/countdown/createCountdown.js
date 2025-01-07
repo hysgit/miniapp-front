@@ -2,7 +2,7 @@ Page({
   data: {
     name: '',
     typeIndex: 0,
-    typeOptions: ['单次', '周循环', '月循环', '年循环', '日循环'],
+    typeOptions: ['单次', '周循环', '月循环', '年循环', '日循环', '6个月循环', '3个月循环', '4个月循环'],
     endDate: '',
     endTime: '00:00'
   },
@@ -65,7 +65,7 @@ Page({
 
     const countdown = {
       name: name,
-      countdownType: typeIndex + 1, // 类型从1开始计数
+      countdownType: Number(typeIndex) + 1, // 类型从1开始计数，使用Number()确保是数字加法
       endTime: endDateTime
     };
 
