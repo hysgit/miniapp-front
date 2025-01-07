@@ -1,4 +1,5 @@
 const app = getApp();
+const dateUtil = require('../../utils/dateUtil.js');
 
 Page({
   data: {
@@ -37,9 +38,8 @@ Page({
                 console.warn('Record missing recordTime:', item);
                 return { ...item, formattedTime: '' };
               }
-              // Handle format "2025-01-07 08:43:13"
-              const timePart = item.recordTime.split(' ')[1];  // Get the time part after the space
-              const time = timePart.split('.')[0];  // Remove any milliseconds if present
+              const date = dateUtil.parseDate(item.recordTime);
+              const time = dateUtil.formatDate(date, 'HH:mm:ss');
               return { ...item, formattedTime: time };
             } catch (error) {
               console.error('Error formatting time for record:', item, error);

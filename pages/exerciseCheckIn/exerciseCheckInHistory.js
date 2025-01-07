@@ -1,4 +1,5 @@
 const app = getApp()
+const dateUtil = require('../../utils/dateUtil.js');
 
 Page({
   data: {
@@ -93,20 +94,13 @@ Page({
   // 日期点击事件处理
   onDateClick(e) {
     console.log('日期点击:', e.currentTarget.dataset);
-    console.log('日期点击:', e.currentTarget);
     const { date, count } = e.currentTarget.dataset;
-    const dateObj = new Date(date);
-    dateObj.setMinutes(dateObj.getMinutes() + dateObj.getTimezoneOffset());
-    if (!isNaN(dateObj.getTime())) {
-      if (count > 0) {
-        console.log('日期点击:', e.currentTarget.dataset);
-        wx.navigateTo({
-          url: `/pages/exerciseCheckIn/exerciseCheckInDetails?date=${date.split('T')[0]}&exerciseId=${this.data.exerciseId}`
-        });
-      }
-    } else {
-      console.error('Invalid date:', date);
-    }
+    if (!date || !count) return;
+    
+    const formattedDate = dateUtil.formatDate(dateUtil.parseDate(date), 'yyyy-MM-dd');
+    wx.navigateTo({
+      url: `/pages/exerciseCheckIn/exerciseCheckInDetails?date=${formattedDate}&exerciseId=${this.data.exerciseId}`
+    });
   },
 
   // 切换到上一个月
@@ -162,7 +156,7 @@ Page({
         const date = new Date(Date.UTC(year, parseInt(monthStr) - 2, prevMonthLastDay.getDate() - i));
         prevMonthDays.push({
           id: `prev-${date.getTime()}`,  // 添加唯一标识
-          date: date.toISOString().split('T')[0],
+          date: dateUtil.formatDate(date, 'yyyy-MM-dd'),
           dayOfMonth: prevMonthLastDay.getDate() - i,
           isCurrentMonth: false,
           count: 0
@@ -176,15 +170,13 @@ Page({
       const currentDate = new Date(Date.UTC(year, parseInt(monthStr) - 1, day));
       // 找出当天的所有记录
       const dayRecords = records.filter(r => {
-        const recordDate = new Date(r.recordTime);
-        // recordDate.setMinutes(recordDate.getMinutes() + recordDate.getTimezoneOffset());
-        recordDate.setMinutes(recordDate.getMinutes());
-        return recordDate.getDate() === day;
+        const recordDate = dateUtil.parseDate(r.recordTime);
+        return recordDate && recordDate.getDate() === day;
       });
       
       currentMonthDays.push({
         id: `current-${currentDate.getTime()}`,  // 添加唯一标识
-        date: currentDate.toISOString().split('T')[0],
+        date: dateUtil.formatDate(currentDate, 'yyyy-MM-dd'),
         dayOfMonth: day,
         isCurrentMonth: true,
         count: dayRecords.length
@@ -192,14 +184,14 @@ Page({
     }
     
     // 获取下个月的开始几天
-    const nextMonthDays = [];
     const lastDayWeekDay = lastDay.getDay();
+    const nextMonthDays = [];
     if (lastDayWeekDay < 6) {
       for (let i = 1; i <= 6 - lastDayWeekDay; i++) {
         const date = new Date(Date.UTC(year, parseInt(monthStr), i));
         nextMonthDays.push({
           id: `next-${date.getTime()}`,  // 添加唯一标识
-          date: date.toISOString().split('T')[0],
+          date: dateUtil.formatDate(date, 'yyyy-MM-dd'),
           dayOfMonth: i,
           isCurrentMonth: false,
           count: 0

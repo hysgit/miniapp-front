@@ -1,3 +1,5 @@
+const dateUtil = require('../../utils/dateUtil.js');
+
 Page({
   data: {
     timers: [],
@@ -78,9 +80,7 @@ Page({
   },
 
   calculateDuration: function(startTime) {
-    const start = new Date(startTime);
-    const now = new Date();
-    const diff = Math.floor((now - start) / 1000); // 转换为秒
+    const diff = dateUtil.calculateTimeDiff(startTime);
     
     const days = Math.floor(diff / (24 * 3600));
     const hours = Math.floor((diff % (24 * 3600)) / 3600);
