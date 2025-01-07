@@ -1,208 +1,117 @@
 .container {
-  min-height: 100vh;
+  padding: 20rpx;
   background-color: #f5f5f5;
-  padding: 30rpx;
-  display: flex;
-  flex-direction: column;
-}
-
-.form {
-  background-color: #fff;
-  border-radius: 12rpx;
-  padding: 30rpx;
-  margin-bottom: 30rpx;
+  min-height: 100vh;
 }
 
 .form-group {
-  background: #fff;
+  background-color: #fff;
   border-radius: 12rpx;
   padding: 20rpx;
-  margin-bottom: 30rpx;
-  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+  margin-bottom: 20rpx;
 }
 
 .form-item {
   margin-bottom: 30rpx;
-  padding: 24rpx 0;
-  border-bottom: 1rpx solid #f0f0f0;
-}
-
-.form-item:last-child {
-  margin-bottom: 0;
-  border-bottom: none;
-}
-
-.form-label {
-  display: block;
-  font-size: 28rpx;
-  color: #666;
-  margin-bottom: 16rpx;
 }
 
 .label {
   display: block;
   font-size: 28rpx;
   color: #333;
-  margin-bottom: 16rpx;
+  margin-bottom: 10rpx;
 }
 
 .input {
   width: 100%;
   height: 80rpx;
-  background: #f8f8f8;
+  border: 1rpx solid #ddd;
   border-radius: 8rpx;
-  padding: 0 24rpx;
+  padding: 0 20rpx;
   font-size: 28rpx;
-  color: #333;
+  box-sizing: border-box;
 }
 
 .textarea {
   width: 100%;
-  height: 200rpx;
-  background: #f8f8f8;
+  height: 160rpx;
+  border: 1rpx solid #ddd;
   border-radius: 8rpx;
-  padding: 24rpx;
+  padding: 20rpx;
   font-size: 28rpx;
-  color: #333;
+  box-sizing: border-box;
 }
 
 .picker {
   width: 100%;
   height: 80rpx;
-  background: #f8f8f8;
+  border: 1rpx solid #ddd;
   border-radius: 8rpx;
-  padding: 0 24rpx;
+  padding: 0 20rpx;
   font-size: 28rpx;
-  color: #333;
-  display: flex;
-  align-items: center;
+  line-height: 80rpx;
+  box-sizing: border-box;
 }
 
-.picker.placeholder {
+.placeholder {
   color: #999;
 }
 
-.button-group {
-  margin-top: 60rpx;
-  padding: 0 30rpx;
-}
-
-.btn {
-  width: 100%;
-  height: 88rpx;
-  line-height: 88rpx;
-  text-align: center;
-  border-radius: 44rpx;
-  font-size: 32rpx;
-  transition: all 0.3s;
-}
-
-.btn-primary {
-  background: #0066cc;
-  color: #fff;
-}
-
-.btn-primary:active {
-  opacity: 0.8;
-}
-
-.footer {
-  margin-top: auto;
-  padding: 30rpx 0;
-}
-
-.submit-btn {
-  width: 100%;
-  height: 88rpx;
-  background: #0066cc;
-  color: #fff;
-  font-size: 32rpx;
-  border-radius: 44rpx;
+.datetime-picker {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 20rpx;
 }
 
-.submit-btn:active {
-  opacity: 0.9;
+.datetime-picker .picker {
+  flex: 1;
 }
 
-/* 时间选择器样式 */
-.time-picker-container {
-  height: 500rpx;
-  background: #fff;
-  padding: 30rpx;
-}
-
-picker-view {
-  width: 100%;
-  height: 400rpx;
-}
-
-.picker-item {
-  line-height: 50px;
-  text-align: center;
-  font-size: 32rpx;
-  color: #333;
-}
-
-/* 提醒开关样式 */
-switch {
-  transform: scale(0.8);
-  margin-left: -16rpx;
-}
-
-/* 标签样式 */
 .section-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 28rpx;
-  color: #333;
   margin-bottom: 20rpx;
 }
 
-.section-title .add-btn {
+.add-btn {
   color: #0066cc;
   font-size: 28rpx;
 }
 
+/* 标签样式 */
 .tags-container {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -8rpx;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
 }
 
 .tag {
-  display: inline-flex;
-  align-items: center;
-  height: 48rpx;
-  padding: 0 16rpx;
-  margin: 8rpx;
+  background-color: #e6f3ff;
+  color: #0066cc;
+  padding: 8rpx 20rpx;
+  border-radius: 30rpx;
   font-size: 24rpx;
-  color: #666;
-  background: #f0f0f0;
-  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
 }
 
 .tag-delete {
-  margin-left: 8rpx;
-  color: #999;
-  font-size: 28rpx;
+  margin-left: 10rpx;
+  font-size: 32rpx;
+  line-height: 1;
 }
 
 .common-tag {
-  background: #f5f5f5;
-  border: 1rpx solid #e8e8e8;
-}
-
-.tag-input {
-  margin-top: 20rpx;
+  background-color: #f5f5f5;
+  color: #666;
 }
 
 /* 附件样式 */
 .attachments-list {
-  margin-top: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
 }
 
 .attachment-item {
@@ -210,9 +119,14 @@ switch {
   justify-content: space-between;
   align-items: center;
   padding: 20rpx;
-  background: #f8f8f8;
+  background-color: #f9f9f9;
   border-radius: 8rpx;
-  margin-bottom: 16rpx;
+}
+
+.attachment-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
 }
 
 .attachment-info {
@@ -221,9 +135,9 @@ switch {
 }
 
 .attachment-name {
-  display: block;
   font-size: 28rpx;
   color: #333;
+  display: block;
   margin-bottom: 8rpx;
 }
 
@@ -232,29 +146,34 @@ switch {
   color: #999;
 }
 
+.delete-btn {
+  color: #ff4d4f;
+  font-size: 28rpx;
+}
+
 /* 评论样式 */
 .comments-list {
-  margin-top: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
 }
 
 .comment-item {
   padding: 20rpx;
-  background: #f8f8f8;
+  background-color: #f9f9f9;
   border-radius: 8rpx;
-  margin-bottom: 16rpx;
 }
 
 .comment-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12rpx;
+  margin-bottom: 10rpx;
 }
 
 .comment-user {
   font-size: 28rpx;
   color: #333;
-  font-weight: 500;
+  font-weight: bold;
 }
 
 .comment-time {
@@ -265,20 +184,27 @@ switch {
 .comment-content {
   font-size: 28rpx;
   color: #666;
-  line-height: 1.4;
+  margin-bottom: 10rpx;
 }
 
-.comment-input {
-  margin-top: 20rpx;
+/* 按钮样式 */
+.button-group {
+  margin-top: 40rpx;
+  padding: 0 20rpx;
 }
 
-.comment-input .textarea {
-  margin-bottom: 20rpx;
+.btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  border-radius: 44rpx;
+  font-size: 32rpx;
 }
 
-.delete-btn {
-  color: #ff4d4f;
-  font-size: 24rpx;
+.btn-primary {
+  background-color: #0066cc;
+  color: #fff;
 }
 
 /* 弹出层样式 */
@@ -299,11 +225,11 @@ switch {
   bottom: 0;
   background-color: #fff;
   transform: translateY(100%);
-  transition: transform 0.3s ease-out;
+  transition: transform 0.3s;
   z-index: 1001;
 }
 
-.popup-content.popup-show {
+.popup-show {
   transform: translateY(0);
 }
 
@@ -315,51 +241,17 @@ switch {
   border-bottom: 1rpx solid #eee;
 }
 
-.popup-header text {
-  font-size: 32rpx;
-  color: #333;
-}
-
 .close-btn {
   font-size: 40rpx;
   color: #999;
-  padding: 10rpx;
 }
 
-.time-picker-container {
-  height: 400rpx;
-  padding: 20rpx;
-}
-
-picker-view {
+.time-picker {
   width: 100%;
-  height: 100%;
+  height: 400rpx;
 }
 
-.picker-item {
-  line-height: 50px;
-  text-align: center;
-  font-size: 32rpx;
-  color: #333;
-}
-
-/* 日期时间选择器样式 */
-.datetime-picker {
-  display: flex;
-  gap: 20rpx;
-}
-
-.datetime-picker .picker {
-  flex: 1;
-  height: 80rpx;
-  line-height: 80rpx;
-  padding: 0 20rpx;
-  background-color: #f8f8f8;
-  border-radius: 8rpx;
-  font-size: 28rpx;
-  color: #333;
-}
-
-.datetime-picker .placeholder {
-  color: #999;
+.popup-footer {
+  padding: 20rpx;
+  border-top: 1rpx solid #eee;
 }

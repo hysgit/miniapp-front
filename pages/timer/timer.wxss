@@ -1,42 +1,44 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   height: 100vh;
-  padding-top: 20px;
+  background-color: #f5f5f5;
+  padding: 10px;
+  padding-bottom: 80px; /* 为悬浮按钮留出空间 */
 }
 
 .create-btn {
-  width: 90%;
-  margin: 10px auto;
-  background-color: #07C160;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #007AFF;
   color: white;
-  border-radius: 4px;
-  padding: 12px 0;
+  padding: 12px 24px;
+  border-radius: 24px;
+  box-shadow: 0 4px 8px rgba(0, 122, 255, 0.3);
+  z-index: 2;
+  transition: transform 0.2s;
   font-size: 16px;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
 }
 
 .create-btn:active {
-  opacity: 0.8;
+  transform: translateX(-50%) scale(0.95);
 }
 
 .timer-item {
-  margin-top: 10px;
+  background-color: white;
+  border-radius: 8px;
   padding: 15px;
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  margin: 10px 15px;
-  width: 90%;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .timer-info {
   display: flex;
   flex-direction: column;
-  gap: 12rpx;
+  gap: 8px;
 }
 
 .timer-header {
@@ -46,13 +48,18 @@
 }
 
 .timer-name {
-  font-size: 34rpx;
+  font-size: 16px;
+  font-weight: bold;
   color: #333;
-  font-weight: 500;
 }
 
 .timer-current {
-  font-size: 32rpx;
+  font-size: 14px;
+  color: #007AFF;
+}
+
+.timer-max-duration {
+  font-size: 12px;
   color: #666;
 }
 
@@ -79,6 +86,9 @@
   right: 0;
   bottom: 0;
   z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-mask {
@@ -87,30 +97,28 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  background: #fff;
+  position: relative;
+  background-color: white;
   border-radius: 12px;
+  width: 80%;
+  max-width: 300px;
   overflow: hidden;
 }
 
 .modal-header {
   padding: 15px;
   text-align: center;
-  font-size: 17px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: bold;
   border-bottom: 1px solid #eee;
 }
 
 .modal-body {
-  padding: 20px;
+  padding: 20px 15px;
 }
 
 .modal-body input {
@@ -119,7 +127,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 0 10px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .modal-footer {
@@ -129,17 +137,17 @@
 
 .modal-btn {
   flex: 1;
-  padding: 12px 0;
   text-align: center;
-  font-size: 16px;
+  padding: 12px;
+  font-size: 14px;
 }
 
 .modal-btn-cancel {
-  color: #333;
+  color: #666;
   border-right: 1px solid #eee;
 }
 
 .modal-btn-confirm {
-  color: #07C160;
-  font-weight: 500;
+  color: #007AFF;
+  font-weight: bold;
 }

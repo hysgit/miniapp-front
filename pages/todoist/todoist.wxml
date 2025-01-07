@@ -1,71 +1,69 @@
 <view class="container">
-  <view class="tab-container">
-    <view class="tab-item {{activeTab === 'todo' ? 'active' : ''}}" bindtap="switchTab" data-tab="todo">
-      未完成
+  <view class="tab-bar">
+    <view class="tab {{activeTab === 'todo' ? 'active' : ''}}" bindtap="switchTab" data-tab="todo">
+      待办事项
     </view>
-    <view class="tab-item {{activeTab === 'done' ? 'active' : ''}}" bindtap="switchTab" data-tab="done">
+    <view class="tab {{activeTab === 'done' ? 'active' : ''}}" bindtap="switchTab" data-tab="done">
       已完成
     </view>
   </view>
 
-  <view class="content">
+  <view class="list-container">
     <view wx:if="{{activeTab === 'todo'}}" class="todo-list">
       <block wx:if="{{todoList.length > 0}}">
-        <movable-area class="todo-item-wrapper" wx:for="{{todoList}}" wx:key="id">
-          <movable-view class="todo-item-content" direction="horizontal" out-of-bounds="true" x="{{item.x}}" damping="50" bindchange="handleMovableChange" bindtouchend="handleTouchEnd" data-id="{{item.id}}">
-            <view class="todo-item">
-              <view class="checkbox" catchtap="toggleTodoStatus" data-id="{{item.id}}">
-                <view class="checkbox-inner"></view>
-              </view>
-              <view class="todo-info" bindtap="editTodoItem" data-id="{{item.id}}">
-                <view class="title-row">
-                  <text class="todo-title">{{item.title}}</text>
-                  <text class="priority-tag priority-{{item.priority}}">
-                    {{item.priority === 0 ? '普通' : '重要'}}
-                  </text>
+        <view class="todo-item" wx:for="{{todoList}}" wx:key="id" bindtap="editTodoItem" data-id="{{item.id}}">
+          <view class="checkbox" catchtap="toggleTodoStatus" data-id="{{item.id}}">
+            <view class="checkbox-inner"></view>
+          </view>
+          <view class="todo-content">
+            <view class="todo-title">{{item.title}}</view>
+            <view class="todo-info">
+              <text class="description" wx:if="{{item.description}}">{{item.description}}</text>
+              <view class="time-info">
+                <text class="create-time">创建：{{item.createdAt}}</text>
+                <view class="right-times">
+                  <text class="due-date" wx:if="{{item.dueDate}}">到期：{{item.dueDate}}</text>
                 </view>
-                <text class="todo-description" wx:if="{{item.description}}">{{item.description}}</text>
-                <text class="due-date" wx:if="{{item.dueDate}}">截止日期：{{item.dueDate}}</text>
               </view>
             </view>
-          </movable-view>
-          <view class="delete-btn" bindtap="deleteTodoItem" data-id="{{item.id}}">删除</view>
-        </movable-area>
+          </view>
+          <view class="priority-tag priority-{{item.priority}}">
+            {{item.priority === 0 ? '普通' : '重要'}}
+          </view>
+        </view>
       </block>
-      <view wx:else class="empty-state">
-        <text class="empty-text">暂无待办事项</text>
-      </view>
+      <view wx:else class="empty-state">暂无待办事项</view>
     </view>
 
-    <view wx:if="{{activeTab === 'done'}}" class="done-list">
+    <view wx:if="{{activeTab === 'done'}}" class="todo-list">
       <block wx:if="{{doneList.length > 0}}">
-        <movable-area class="todo-item-wrapper" wx:for="{{doneList}}" wx:key="id">
-          <movable-view class="todo-item-content" direction="horizontal" out-of-bounds="true" x="{{item.x}}" damping="50" bindchange="handleMovableChange" bindtouchend="handleTouchEnd" data-id="{{item.id}}">
-            <view class="todo-item done">
-              <view class="checkbox checked" catchtap="toggleTodoStatus" data-id="{{item.id}}">
-                <view class="checkbox-inner"></view>
-              </view>
-              <view class="todo-info">
-                <view class="title-row">
-                  <text class="todo-title">{{item.title}}</text>
-                  <text class="priority-tag priority-{{item.priority}}">
-                    {{item.priority === 0 ? '普通' : '重要'}}
-                  </text>
+        <view class="todo-item done" wx:for="{{doneList}}" wx:key="id">
+          <view class="checkbox checked" catchtap="toggleTodoStatus" data-id="{{item.id}}">
+            <view class="checkbox-inner"></view>
+          </view>
+          <view class="todo-content">
+            <view class="todo-title">{{item.title}}</view>
+            <view class="todo-info">
+              <text class="description" wx:if="{{item.description}}">{{item.description}}</text>
+              <view class="time-info">
+                <text class="create-time">创建：{{item.createdAt}}</text>
+                <view class="right-times">
+                  <text class="due-date" wx:if="{{item.dueDate}}">到期：{{item.dueDate}}</text>
+                  <text class="complete-time" wx:if="{{item.completedTime}}">完成：{{item.completedTime}}</text>
                 </view>
-                <text class="todo-description" wx:if="{{item.description}}">{{item.description}}</text>
-                <text class="due-date" wx:if="{{item.dueDate}}">截止日期：{{item.dueDate}}</text>
-                <text class="complete-time" wx:if="{{item.completedTime}}">完成时间：{{item.completedTime}}</text>
               </view>
             </view>
-          </movable-view>
-          <view class="delete-btn" bindtap="deleteTodoItem" data-id="{{item.id}}">删除</view>
-        </movable-area>
+          </view>
+          <view class="priority-tag priority-{{item.priority}}">
+            {{item.priority === 0 ? '普通' : '重要'}}
+          </view>
+        </view>
       </block>
-      <view wx:else class="empty-state">
-        <text class="empty-text">暂无已完成事项</text>
-      </view>
+      <view wx:else class="empty-state">暂无已完成事项</view>
     </view>
   </view>
 
-  <view class="add-btn" bindtap="showAddTodoModal">+</view>
+  <view class="add-btn" bindtap="showAddTodoModal">
+    <text class="add-icon">+</text>
+  </view>
 </view>

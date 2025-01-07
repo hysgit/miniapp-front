@@ -145,10 +145,22 @@
       <view class="attachment-item"
             wx:for="{{todoItem.attachments}}"
             wx:key="url">
-        <view class="attachment-info">
-          <text class="attachment-name">{{item.name}}</text>
-          <text class="attachment-size">{{item.sizeText}}</text>
-        </view>
+        <!-- 图片附件 -->
+        <block wx:if="{{item.type === 'image'}}">
+          <image class="attachment-image" 
+                 src="{{item.url}}" 
+                 mode="aspectFill"
+                 bindtap="previewImage"
+                 data-url="{{item.url}}"
+                 data-index="{{index}}"/>
+        </block>
+        <!-- 其他类型附件 -->
+        <block wx:else>
+          <view class="attachment-info" bindtap="downloadFile" data-url="{{item.url}}">
+            <text class="attachment-name">{{item.name}}</text>
+            <text class="attachment-size">{{item.sizeText}}</text>
+          </view>
+        </block>
         <text class="delete-btn"
               bindtap="removeAttachment"
               data-index="{{index}}">删除</text>
@@ -166,10 +178,10 @@
     <view class="comments-list">
       <view class="comment-item"
             wx:for="{{todoItem.comments}}"
-            wx:key="time">
+            wx:key="createTime">
         <view class="comment-header">
-          <text class="comment-user">{{item.user.nickName}}</text>
-          <text class="comment-time">{{item.time}}</text>
+          <text class="comment-user">{{item.userName}}</text>
+          <text class="comment-time">{{item.createTime}}</text>
         </view>
         <view class="comment-content">{{item.content}}</view>
         <text class="delete-btn"
@@ -202,20 +214,18 @@
     <text>选择时间</text>
     <text class="close-btn" bindtap="onTimePickerClose">×</text>
   </view>
-  <view class="time-picker-container">
-    <picker-view indicator-style="height: 50px;"
-                 value="{{[hours, minutes]}}"
-                 bindchange="onTimePickerConfirm">
-      <picker-view-column>
-        <view wx:for="{{24}}" wx:key="*this" class="picker-item">
-          {{item < 10 ? '0' + item : item}}
-        </view>
-      </picker-view-column>
-      <picker-view-column>
-        <view wx:for="{{60}}" wx:key="*this" class="picker-item">
-          {{item < 10 ? '0' + item : item}}
-        </view>
-      </picker-view-column>
-    </picker-view>
+  <picker-view class="time-picker"
+               indicator-style="height: 50px;"
+               value="{{timePickerValue}}"
+               bindchange="onTimePickerChange">
+    <picker-view-column>
+      <view wx:for="{{hours}}" wx:key="*this" style="line-height: 50px">{{item}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{minutes}}" wx:key="*this" style="line-height: 50px">{{item}}</view>
+    </picker-view-column>
+  </picker-view>
+  <view class="popup-footer">
+    <button class="btn btn-primary" bindtap="confirmTimePicker">确定</button>
   </view>
 </view>

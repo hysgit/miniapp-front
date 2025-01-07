@@ -1,4 +1,6 @@
 // pages/todoist/todoist.js
+const dateUtil = require('../../utils/dateUtil');
+
 Page({
   data: {
     activeTab: 'todo', // 当前激活的标签：'todo' 或 'done'
@@ -99,7 +101,7 @@ Page({
 
   // 加载待办事项列表
   async loadTodoList() {
-    wx.showNavigationBarLoading()
+    wx.showNavigationBarLoading();
     try {
       const res = await new Promise((resolve, reject) => {
         wx.request({
@@ -107,39 +109,59 @@ Page({
           method: 'GET',
           success: resolve,
           fail: reject
-        })
-      })
+        });
+      });
 
       if (res.data.code === 0) {
-        const list = res.data.data || []
-        // 添加 x 属性用于滑动
+        const list = res.data.data || [];
+        // 格式化时间并添加 x 属性用于滑动
         const todoList = list
           .filter(item => item.status === 0)
-          .map(item => ({ ...item, x: 0 }))
+          .map(item => ({
+            ...item,
+            x: 0,
+            createdAt: this.formatDateTime(item.createTime),
+            dueDate: this.formatDateTime(item.dueDate)
+          }));
+
         const doneList = list
           .filter(item => item.status === 1)
-          .map(item => ({ ...item, x: 0 }))
+          .map(item => ({
+            ...item,
+            x: 0,
+            createdAt: this.formatDateTime(item.createTime),
+            dueDate: this.formatDateTime(item.dueDate),
+            completedTime: this.formatDateTime(item.completedTime)
+          }));
         
         this.setData({
           todoList,
           doneList,
           filteredTodoList: todoList,
           filteredDoneList: doneList
-        })
+        });
       } else {
         wx.showToast({
           title: res.data.message || '加载失败',
           icon: 'none'
-        })
+        });
       }
     } catch (error) {
+      console.error('加载待办事项失败:', error);
       wx.showToast({
         title: '加载失败',
         icon: 'none'
-      })
+      });
     } finally {
-      wx.hideNavigationBarLoading()
+      wx.hideNavigationBarLoading();
     }
+  },
+
+  // 格式化时间
+  formatDateTime(dateTimeStr) {
+    if (!dateTimeStr) return '';
+    const date = dateUtil.parseDate(dateTimeStr);
+    return dateUtil.formatDate(date, 'yyyy-MM-dd HH:mm');
   },
 
   // 切换待办事项状态

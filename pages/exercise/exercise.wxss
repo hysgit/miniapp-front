@@ -1,39 +1,39 @@
 .container {
-  padding: 20rpx;
+  padding: 15rpx;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30rpx;
+  margin-bottom: 20rpx;
 }
 
 .title {
-  font-size: 36rpx;
+  font-size: 32rpx;
   font-weight: bold;
 }
 
 .month-info {
-  margin-bottom: 30rpx;
-  padding: 20rpx;
+  margin-bottom: 20rpx;
+  padding: 15rpx;
   background-color: #f8f8f8;
-  border-radius: 10rpx;
+  border-radius: 8rpx;
 }
 
 .month-text {
-  font-size: 28rpx;
+  font-size: 26rpx;
   color: #666;
 }
 
 .add-btn {
   background-color: #007AFF;
   color: white;
-  font-size: 28rpx;
-  height: 64rpx;
-  line-height: 64rpx;
-  padding: 0 30rpx;
-  border-radius: 32rpx;
+  font-size: 26rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  padding: 0 24rpx;
+  border-radius: 28rpx;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -45,42 +45,42 @@
 
 .exercise-item {
   background: white;
-  padding: 30rpx;
-  border-radius: 16rpx;
-  margin-bottom: 20rpx;
+  padding: 16rpx 24rpx;
+  border-radius: 12rpx;
+  margin-bottom: 12rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
 }
 
 .exercise-info {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20rpx;
+  margin-bottom: 12rpx;
 }
 
 .exercise-name {
   font-size: 32rpx;
   color: #333;
-  font-weight: bold;
 }
 
 .exercise-type {
   font-size: 24rpx;
   color: #666;
-  padding: 4rpx 16rpx;
+  padding: 2rpx 12rpx;
   background-color: #f5f5f5;
-  border-radius: 20rpx;
+  border-radius: 16rpx;
+  margin-top: 4rpx;
 }
 
 .exercise-stats {
   display: flex;
   justify-content: space-between;
-  padding: 20rpx 0;
+  padding: 12rpx 0;
   border-top: 1rpx solid #eee;
   border-bottom: 1rpx solid #eee;
-  margin-bottom: 20rpx;
+  margin-bottom: 12rpx;
 }
 
 .stats-item {
@@ -92,23 +92,29 @@
 .stats-label {
   font-size: 24rpx;
   color: #666;
-  margin-bottom: 8rpx;
+  margin-bottom: 4rpx;
 }
 
 .stats-value {
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #333;
-  font-weight: bold;
 }
 
 .exercise-status {
-  text-align: right;
-  font-size: 28rpx;
-  color: #999;
+  font-size: 24rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 16rpx;
+  text-align: center;
 }
 
-.exercise-status.done {
-  color: #007AFF;
+.status-done {
+  color: #07C160;
+  background-color: rgba(7, 193, 96, 0.1);
+}
+
+.status-todo {
+  color: #666;
+  background-color: #f5f5f5;
 }
 
 .loading {
