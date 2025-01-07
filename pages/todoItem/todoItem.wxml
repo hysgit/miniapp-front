@@ -44,19 +44,19 @@
       <text class="label">截止日期</text>
       <view class="datetime-picker">
         <picker mode="date" 
-                value="{{todoItem.dueDate}}"
+                value="{{todoItem.dueDateStr}}"
                 start="2024-01-01"
                 end="2030-12-31"
                 bindchange="onDateChange">
-          <view class="picker {{todoItem.dueDate ? '' : 'placeholder'}}">
-            {{todoItem.dueDate || '选择日期'}}
+          <view class="picker {{todoItem.dueDateStr ? '' : 'placeholder'}}">
+            {{todoItem.dueDateStr || '选择日期'}}
           </view>
         </picker>
         <picker mode="time" 
-                value="{{todoItem.dueTime}}"
+                value="{{todoItem.dueTime[0] + ':' + todoItem.dueTime[1]}}"
                 bindchange="onTimeChange">
-          <view class="picker {{todoItem.dueTime ? '' : 'placeholder'}}">
-            {{todoItem.dueTime || '选择时间'}}
+          <view class="picker {{todoItem.dueTime.length ? '' : 'placeholder'}}">
+            {{todoItem.dueTime.length ? (todoItem.dueTime[0] + ':' + todoItem.dueTime[1]) : '选择时间'}}
           </view>
         </picker>
       </view>

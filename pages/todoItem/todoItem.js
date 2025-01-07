@@ -9,7 +9,8 @@ Page({
       category: '',
       priority: 0,
       dueDate: '',
-      dueTime: null,
+      dueDateStr: '',
+      dueTime: [],
       reminder: false,
       reminderTime: '',
       repeatType: 'none',
@@ -50,22 +51,18 @@ Page({
       success: (res) => {
         if (res.data.code === 0) {
           const todoItem = res.data.data;
-          // 格式化时间
-          if (todoItem.dueDate) {
-            const date = new Date(todoItem.dueDate);
-            todoItem.dueDate = formatTime.formatDate(date, 'yyyy-MM-dd');
-            todoItem.dueTime = [date.getHours(), date.getMinutes()];
-          }
-          if (todoItem.reminderTime) {
-            const date = new Date(todoItem.reminderTime);
-            todoItem.reminderTime = formatTime.formatDate(date, 'HH:mm');
-          }
           // 设置附件大小显示
           if (todoItem.attachments) {
             todoItem.attachments = todoItem.attachments.map(attachment => ({
               ...attachment,
               sizeText: this.formatFileSize(attachment.size)
             }));
+          }
+          // 设置日期和时间字段
+          if (todoItem.dueDate) {
+            const [date, time] = todoItem.dueDate.split(' ');
+            todoItem.dueDateStr = date;
+            todoItem.dueTime = time.split(':').slice(0, 2).map(Number);
           }
           this.setData({
             todoItem,
@@ -112,15 +109,25 @@ Page({
   },
 
   onDateChange(e) {
+    const date = e.detail.value;
+    const time = this.data.todoItem.dueDate ? this.data.todoItem.dueDate.split(' ')[1] : '00:00:00';
+    const dateTimeStr = `${date} ${time}`;
     this.setData({
-      'todoItem.dueDate': e.detail.value
-    })
+      'todoItem.dueDate': dateTimeStr,
+      'todoItem.dueDateStr': date,
+      'todoItem.dueTime': time.split(':').slice(0, 2).map(Number)
+    });
   },
 
   onTimeChange(e) {
+    const time = e.detail.value + ':00';
+    const date = this.data.todoItem.dueDate ? this.data.todoItem.dueDate.split(' ')[0] : formatTime.formatDate(new Date(), 'yyyy-MM-dd');
+    const dateTimeStr = `${date} ${time}`;
     this.setData({
-      'todoItem.dueTime': e.detail.value.split(':').map(Number)
-    })
+      'todoItem.dueDate': dateTimeStr,
+      'todoItem.dueDateStr': date,
+      'todoItem.dueTime': time.split(':').slice(0, 2).map(Number)
+    });
   },
 
   onReminderChange(e) {
@@ -407,6 +414,11 @@ Page({
     this.onTimePickerClose()
   },
 
+  formatDateTime(dateTimeStr) {
+    if (!dateTimeStr) return null;
+    return dateTimeStr.replace('T', ' ').split('.')[0];
+  },
+
   saveTodoItem() {
     if (!this.data.todoItem.title) {
       wx.showToast({
@@ -422,10 +434,27 @@ Page({
       `${app.globalData.baseUrl}/todoItem/update` :
       `${app.globalData.baseUrl}/todoItem/create`
 
+    // 处理数据
+    const todoData = {
+      ...this.data.todoItem,
+      // 移除attachments中的sizeText字段
+      attachments: this.data.todoItem.attachments ? this.data.todoItem.attachments.map(({sizeText, ...attachment}) => attachment) : [],
+      // 处理所有日期时间字段
+      createTime: this.formatDateTime(this.data.todoItem.createTime),
+      updateTime: this.formatDateTime(this.data.todoItem.updateTime),
+      completedTime: this.formatDateTime(this.data.todoItem.completedTime),
+      reminderTime: this.formatDateTime(this.data.todoItem.reminderTime),
+      // 处理评论中的日期时间
+      comments: this.data.todoItem.comments ? this.data.todoItem.comments.map(comment => ({
+        ...comment,
+        createTime: this.formatDateTime(comment.createTime)
+      })) : []
+    };
+
     wx.request({
       url: url,
       method: 'POST',
-      data: this.data.todoItem,
+      data: todoData,
       success: (res) => {
         if (res.data.code === 0) {
           wx.showToast({
