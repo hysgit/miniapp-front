@@ -67,8 +67,8 @@ Page({
   calculateTimeColor(createTime, dueDate) {
     if (!createTime || !dueDate) return '';
     
-    // 使用dateUtil来解析日期
-    const now = new Date('2025-01-07T15:37:17+08:00');
+    // 使用当前时间
+    const now = new Date();
     const startTime = formatTime.parseDate(createTime);
     const endTime = formatTime.parseDate(dueDate);
     

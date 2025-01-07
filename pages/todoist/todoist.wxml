@@ -22,7 +22,7 @@
               <view class="time-info">
                 <text class="create-time">创建：{{item.createdAt}}</text>
                 <view class="right-times">
-                  <text class="due-date" wx:if="{{item.dueDate}}">到期：{{item.dueDate}}</text>
+                  <text class="due-date" wx:if="{{item.dueDate}}" style="color: {{item.dueTimeColor}}">到期：{{item.dueDate}}</text>
                 </view>
               </view>
             </view>
@@ -48,7 +48,7 @@
               <view class="time-info">
                 <text class="create-time">创建：{{item.createdAt}}</text>
                 <view class="right-times">
-                  <text class="due-date" wx:if="{{item.dueDate}}">到期：{{item.dueDate}}</text>
+                  <text class="due-date" wx:if="{{item.dueDate}}" style="color: {{item.dueTimeColor}}">到期：{{item.dueDate}}</text>
                   <text class="complete-time" wx:if="{{item.completedTime}}">完成：{{item.completedTime}}</text>
                 </view>
               </view>
