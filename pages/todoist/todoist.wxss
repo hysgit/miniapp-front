@@ -1,82 +1,79 @@
 .container {
-  min-height: 100vh;
-  background-color: #f5f5f5;
-  padding-bottom: env(safe-area-inset-bottom);
+  padding: 20rpx;
+  height: 100vh;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
 
 .tab-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 88rpx;
-  background-color: #fff;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  border-bottom: 1px solid #eee;
-  z-index: 100;
+  margin-bottom: 20rpx;
+  background: #fff;
+  padding: 10rpx;
+  border-radius: 10rpx;
 }
 
 .tab {
-  position: relative;
-  padding: 20rpx 40rpx;
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
   font-size: 28rpx;
   color: #666;
 }
 
 .tab.active {
-  color: #333;
-  font-weight: 500;
-}
-
-.tab.active::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40rpx;
-  height: 4rpx;
-  background-color: #333;
-  border-radius: 2rpx;
+  color: #007AFF;
+  font-weight: bold;
 }
 
 .list-container {
   flex: 1;
-  margin-top: 88rpx;
-  padding: 20rpx;
+  overflow-y: auto;
 }
 
 .todo-list {
-  padding: 10rpx 0;
+  padding: 10rpx;
 }
 
 .todo-item {
-  position: relative;
-  background: #fff;
-  padding: 24rpx;
-  border-radius: 12rpx;
-  margin-bottom: 20rpx;
   display: flex;
   align-items: flex-start;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
 }
 
 .checkbox {
-  flex-shrink: 0;
   width: 40rpx;
   height: 40rpx;
   border: 2rpx solid #ddd;
   border-radius: 50%;
   margin-right: 20rpx;
-  margin-top: 6rpx;
+  position: relative;
 }
 
 .checkbox.checked {
-  background-color: #4CAF50;
-  border-color: #4CAF50;
+  background: #007AFF;
+  border-color: #007AFF;
+}
+
+.checkbox-inner {
+  display: none;
+}
+
+.checkbox.checked .checkbox-inner {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20rpx;
+  height: 20rpx;
+  background: #fff;
+  border-radius: 50%;
 }
 
 .todo-content {
@@ -85,9 +82,9 @@
 }
 
 .todo-title {
-  font-size: 30rpx;
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
   color: #333;
-  margin-bottom: 8rpx;
 }
 
 .todo-info {
@@ -97,54 +94,43 @@
 
 .description {
   display: block;
-  margin-bottom: 8rpx;
-  color: #666;
+  margin-bottom: 10rpx;
 }
 
 .time-info {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  font-size: 22rpx;
-  color: #888;
-  margin-top: 4rpx;
-}
-
-.create-time {
-  white-space: nowrap;
 }
 
 .right-times {
-  display: flex;
-  gap: 16rpx;
+  text-align: right;
 }
 
 .due-date {
-  color: #ff9800;
-  white-space: nowrap;
+  margin-left: 20rpx;
 }
 
 .complete-time {
-  color: #4CAF50;
-  white-space: nowrap;
+  display: block;
+  color: #52c41a;
 }
 
 .priority-tag {
-  flex-shrink: 0;
-  font-size: 22rpx;
+  font-size: 24rpx;
   padding: 4rpx 12rpx;
   border-radius: 6rpx;
-  height: fit-content;
-}
-
-.priority-0 {
-  background-color: #f5f5f5;
+  background: #f0f0f0;
   color: #666;
 }
 
 .priority-1 {
-  background-color: #fff3e0;
-  color: #ff9800;
+  background: #fff1f0;
+  color: #ff4d4f;
+}
+
+.todo-item.done .todo-title {
+  color: #999;
+  text-decoration: line-through;
 }
 
 .empty-state {
@@ -157,20 +143,19 @@
 .add-btn {
   position: fixed;
   right: 40rpx;
-  bottom: calc(40rpx + env(safe-area-inset-bottom));
+  bottom: 40rpx;
   width: 100rpx;
   height: 100rpx;
-  background: #4CAF50;
+  background: #007AFF;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.2);
-  z-index: 100;
+  box-shadow: 0 4rpx 8rpx rgba(0, 122, 255, 0.2);
 }
 
 .add-icon {
   color: #fff;
   font-size: 60rpx;
-  font-weight: 300;
+  line-height: 1;
 }
