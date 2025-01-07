@@ -100,14 +100,24 @@
 .time-info {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  font-size: 24rpx;
+  color: #999;
+  width: 100%;
+  min-height: 32rpx;
+}
+
+.create-time {
+  white-space: nowrap;
+  padding-right: 20rpx;
 }
 
 .right-times {
-  text-align: right;
+  white-space: nowrap;
 }
 
 .due-date {
-  margin-left: 20rpx;
+  white-space: nowrap;
 }
 
 .complete-time {
@@ -121,6 +131,9 @@
   border-radius: 6rpx;
   background: #f0f0f0;
   color: #666;
+  writing-mode: horizontal-tb;
+  min-width: 48rpx;
+  text-align: center;
 }
 
 .priority-1 {
