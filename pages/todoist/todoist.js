@@ -21,10 +21,11 @@ Page({
           const todoList = res.data.data
             .filter(item => item.status === 0)
             .map(item => {
-              // 格式化时间
-              item.createdAt = formatTime.formatDate(new Date(item.createTime))
+              // 格式化时间，包含时分
+              item.createdAt = formatTime.formatDate(formatTime.parseDate(item.createTime), 'yyyy-MM-dd HH:mm')
               if (item.dueDate) {
-                item.dueDate = formatTime.formatDate(new Date(item.dueDate))
+                item.dueDate = formatTime.formatDate(formatTime.parseDate(item.dueDate), 'yyyy-MM-dd HH:mm')
+                item.dueTimeColor = this.calculateTimeColor(item.createTime, item.dueDate)
               }
               return item
             })
@@ -32,13 +33,13 @@ Page({
           const doneList = res.data.data
             .filter(item => item.status === 1)
             .map(item => {
-              // 格式化时间
-              item.createdAt = formatTime.formatDate(new Date(item.createTime))
+              // 格式化时间，包含时分
+              item.createdAt = formatTime.formatDate(formatTime.parseDate(item.createTime), 'yyyy-MM-dd HH:mm')
               if (item.dueDate) {
-                item.dueDate = formatTime.formatDate(new Date(item.dueDate))
+                item.dueDate = formatTime.formatDate(formatTime.parseDate(item.dueDate), 'yyyy-MM-dd HH:mm')
               }
               if (item.completedTime) {
-                item.completedTime = formatTime.formatDate(new Date(item.completedTime))
+                item.completedTime = formatTime.formatDate(formatTime.parseDate(item.completedTime), 'yyyy-MM-dd HH:mm')
               }
               return item
             })
@@ -61,6 +62,32 @@ Page({
         })
       }
     })
+  },
+
+  calculateTimeColor(createTime, dueDate) {
+    if (!createTime || !dueDate) return '';
+    
+    // 使用dateUtil来解析日期
+    const now = new Date('2025-01-07T15:37:17+08:00');
+    const startTime = formatTime.parseDate(createTime);
+    const endTime = formatTime.parseDate(dueDate);
+    
+    if (!startTime || !endTime) return '';
+    
+    // If current time is before start time or after end time, return edge colors
+    if (now < startTime) return 'rgb(0, 255, 0)';
+    if (now > endTime) return 'rgb(255, 0, 0)';
+    
+    // Calculate progress between start and end time
+    const totalDuration = endTime - startTime;
+    const currentProgress = now - startTime;
+    const ratio = currentProgress / totalDuration;
+    
+    // Calculate RGB values for gradient from green to red
+    const red = Math.round(255 * ratio);
+    const green = Math.round(255 * (1 - ratio));
+    
+    return `rgb(${red}, ${green}, 0)`;
   },
 
   switchTab(e) {
