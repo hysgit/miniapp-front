@@ -32,8 +32,19 @@ Page({
       success: (res) => {
         if (res.data.code === 0) {
           const formattedData = res.data.data.map(item => {
-            const time = item.recordTime.split('T')[1].split('.')[0];
-            return { ...item, formattedTime: time };
+            try {
+              if (!item || !item.recordTime) {
+                console.warn('Record missing recordTime:', item);
+                return { ...item, formattedTime: '' };
+              }
+              // Handle format "2025-01-07 08:43:13"
+              const timePart = item.recordTime.split(' ')[1];  // Get the time part after the space
+              const time = timePart.split('.')[0];  // Remove any milliseconds if present
+              return { ...item, formattedTime: time };
+            } catch (error) {
+              console.error('Error formatting time for record:', item, error);
+              return { ...item, formattedTime: '' };
+            }
           });
           this.setData({ checkInTimes: formattedData });
           console.log(this.data.checkInTimes)
