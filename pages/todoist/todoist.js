@@ -100,7 +100,7 @@ Page({
   toggleTodoStatus(e) {
     const id = e.currentTarget.dataset.id
     wx.request({
-      url: `${app.globalData.baseUrl}/todoItem/${id}/toggle`,
+      url: `${app.globalData.baseUrl}/todoItem/toggle/${id}`,
       method: 'POST',
       success: (res) => {
         if (res.data.code === 0) {
