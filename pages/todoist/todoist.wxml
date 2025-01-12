@@ -16,9 +16,9 @@
             <view class="checkbox-inner"></view>
           </view>
           <view class="todo-content">
-            <view class="todo-title">{{item.title}}</view>
+            <view class="todo-title" style="{{item.dueTimeColor === 'rgb(255, 0, 0)' ? 'color: red' : ''}}">{{item.title}}</view>
             <view class="todo-info">
-              <text class="description" wx:if="{{item.description}}">{{item.description}}</text>
+              <text class="description" wx:if="{{item.description}}" style="{{item.dueTimeColor === 'rgb(255, 0, 0)' ? 'color: red' : ''}}">{{item.description}}</text>
               <view class="time-info">
                 <text class="create-time">创建：{{item.createdAt}}</text>
                 <view class="right-times">
