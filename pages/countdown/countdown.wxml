@@ -18,6 +18,7 @@
               <text class="countdown-type">{{countdownTypes[item.countdownType-1]}}</text>
             </view>
             <view class="countdown-actions">
+              <text class="action-btn edit" bindtap="onEditCountdown" data-id="{{item.id}}">编辑</text>
               <text class="action-btn complete" bindtap="onCompleteCountdown" data-id="{{item.id}}">完成</text>
               <text class="action-btn delete" bindtap="onDeleteCountdown" data-id="{{item.id}}">删除</text>
             </view>
@@ -61,6 +62,46 @@
             </view>
           </view>
         </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 编辑弹窗 -->
+  <view class="modal-mask" wx:if="{{showEditModal}}">
+    <view class="modal-container">
+      <view class="modal-header">
+        <text>编辑倒计时</text>
+        <text class="close-btn" bindtap="onCloseEditModal">×</text>
+      </view>
+      <view class="modal-body">
+        <view class="form-item">
+          <text class="label">名称</text>
+          <input 
+            class="input" 
+            value="{{editForm.name}}" 
+            bindinput="onEditFormChange" 
+            data-field="name"
+            placeholder="请输入倒计时名称"
+          />
+        </view>
+        <view class="form-item">
+          <text class="label">循环类型</text>
+          <picker 
+            mode="selector" 
+            range="{{countdownTypes}}" 
+            value="{{editForm.countdownType - 1}}"
+            bindchange="onEditFormChange"
+            data-field="countdownType"
+          >
+            <view class="picker">
+              {{countdownTypes[editForm.countdownType - 1]}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="btn cancel" bindtap="onCloseEditModal">取消</button>
+        <button class="btn confirm" bindtap="onSubmitEdit">确定</button>
       </view>
     </view>
   </view>

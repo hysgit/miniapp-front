@@ -190,3 +190,106 @@ button {
   display: flex;
   align-items: center;
 }
+
+/* 编辑按钮样式 */
+.action-btn.edit {
+  color: #34C759;
+  background-color: #e6f9ec;
+}
+
+/* 编辑弹窗样式 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-container {
+  width: 80%;
+  max-width: 300px;
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header text {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.close-btn {
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 16px;
+}
+
+.form-item {
+  margin-bottom: 16px;
+}
+
+.label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.picker {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+}
+
+.modal-footer {
+  display: flex;
+  border-top: 1px solid #eee;
+}
+
+.btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn.cancel {
+  color: #666;
+  border-right: 1px solid #eee;
+}
+
+.btn.confirm {
+  color: #007AFF;
+  font-weight: bold;
+}

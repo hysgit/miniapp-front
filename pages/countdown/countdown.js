@@ -5,7 +5,13 @@ Page({
   data: {
     activeTab: 'ongoing',
     countdowns: [],
-    countdownTypes: ['单次', '周循环', '月循环', '年循环', '日循环']
+    countdownTypes: ['单次', '周循环', '月循环', '年循环', '日循环'],
+    showEditModal: false,
+    editingCountdown: null,
+    editForm: {
+      name: '',
+      countdownType: 1
+    }
   },
 
   onShow: function() {
@@ -26,7 +32,6 @@ Page({
       },
       success: (res) => {
         if (res.statusCode === 200) {
-          // 处理倒计时数据，计算剩余时间
           const countdowns = res.data.map(item => {
             if (this.data.activeTab === 'ongoing') {
               item.remainingTime = this.calculateRemainingTime(item.endTime);
@@ -42,10 +47,65 @@ Page({
             countdowns: countdowns
           });
 
-          // 如果是进行中的倒计时，启动定时器更新剩余时间
           if (this.data.activeTab === 'ongoing') {
             this.startTimer();
           }
+        }
+      }
+    });
+  },
+
+  // 打开编辑弹窗
+  onEditCountdown: function(e) {
+    const countdown = this.data.countdowns.find(item => item.id === e.currentTarget.dataset.id);
+    this.setData({
+      showEditModal: true,
+      editingCountdown: countdown,
+      editForm: {
+        name: countdown.name,
+        countdownType: countdown.countdownType
+      }
+    });
+  },
+
+  // 关闭编辑弹窗
+  onCloseEditModal: function() {
+    this.setData({
+      showEditModal: false,
+      editingCountdown: null
+    });
+  },
+
+  // 处理表单输入
+  onEditFormChange: function(e) {
+    const { field } = e.currentTarget.dataset;
+    this.setData({
+      [`editForm.${field}`]: e.detail.value
+    });
+  },
+
+  // 提交编辑表单
+  onSubmitEdit: function() {
+    const { editingCountdown, editForm } = this.data;
+    wx.request({
+      url: `${app.globalData.baseUrl}/countdown/${editingCountdown.id}/update`,
+      method: 'POST',
+      header: {
+        'Authorization': `Bearer ${wx.getStorageSync('token')}`,
+        'Content-Type': 'application/json'
+      },
+      data: {
+        name: editForm.name,
+        countdownType: editForm.countdownType
+      },
+      success: (res) => {
+        if (res.statusCode === 200) {
+          wx.showToast({
+            title: '更新成功',
+            icon: 'success'
+          });
+          this.loadCountdowns();
+          this.onCloseEditModal();
         }
       }
     });
@@ -79,12 +139,10 @@ Page({
   },
 
   startTimer: function() {
-    // 清除之前的定时器
     if (this.timer) {
       clearInterval(this.timer);
     }
 
-    // 每分钟更新一次剩余时间
     this.timer = setInterval(() => {
       const countdowns = this.data.countdowns.map(item => {
         item.remainingTime = this.calculateRemainingTime(item.endTime);
@@ -93,13 +151,12 @@ Page({
       this.setData({
         countdowns: countdowns
       });
-    }, 60000); // 每分钟更新一次
+    }, 60000);
   },
 
   switchTab: function(e) {
     const tab = e.currentTarget.dataset.tab;
     if (tab !== this.data.activeTab) {
-      // 切换标签时清除定时器
       if (this.timer) {
         clearInterval(this.timer);
       }
@@ -175,7 +232,6 @@ Page({
   },
 
   onUnload: function() {
-    // 页面卸载时清除定时器
     if (this.timer) {
       clearInterval(this.timer);
     }
