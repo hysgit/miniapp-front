@@ -74,8 +74,7 @@ Page({
       url: `${getApp().globalData.baseUrl}/countdown/create`,
       method: 'POST',
       header: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${wx.getStorageSync('token')}`
+        'Content-Type': 'application/json'
       },
       data: countdown,
       success: (res) => {

@@ -35,7 +35,7 @@ Page({
       url: `${getApp().globalData.baseUrl}/timer/list`,
       method: 'GET',
       header: {
-        'Authorization': `Bearer ${wx.getStorageSync('token')}`
+        'Content-Type': 'application/json'
       },
       success: (res) => {
         this.setData({ timers: res.data }, () => {
@@ -134,7 +134,6 @@ Page({
       url: `${getApp().globalData.baseUrl}/timer/create`,
       method: 'POST',
       header: {
-        'Authorization': `Bearer ${wx.getStorageSync('token')}`,
         'Content-Type': 'application/json'
       },
       data: {

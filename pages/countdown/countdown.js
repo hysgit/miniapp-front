@@ -27,9 +27,6 @@ Page({
     wx.request({
       url: `${app.globalData.baseUrl}${url}`,
       method: 'GET',
-      header: {
-        'Authorization': `Bearer ${wx.getStorageSync('token')}`
-      },
       success: (res) => {
         if (res.statusCode === 200) {
           const countdowns = res.data.map(item => {
@@ -91,7 +88,6 @@ Page({
       url: `${app.globalData.baseUrl}/countdown/${editingCountdown.id}/update`,
       method: 'POST',
       header: {
-        'Authorization': `Bearer ${wx.getStorageSync('token')}`,
         'Content-Type': 'application/json'
       },
       data: {
@@ -185,9 +181,6 @@ Page({
           wx.request({
             url: `${app.globalData.baseUrl}/countdown/${id}/complete`,
             method: 'POST',
-            header: {
-              'Authorization': `Bearer ${wx.getStorageSync('token')}`
-            },
             success: (res) => {
               if (res.statusCode === 200) {
                 wx.showToast({
@@ -213,9 +206,6 @@ Page({
           wx.request({
             url: `${app.globalData.baseUrl}/countdown/${id}`,
             method: 'DELETE',
-            header: {
-              'Authorization': `Bearer ${wx.getStorageSync('token')}`
-            },
             success: (res) => {
               if (res.statusCode === 200) {
                 wx.showToast({
