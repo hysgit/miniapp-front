@@ -39,11 +39,24 @@ Page({
           })
         }
       },
-      fail: () => {
-        wx.showToast({
-          title: '网络错误，请稍后重试',
-          icon: 'none'
-        })
+      fail: (err) => {
+        if (err.statusCode === 401) {
+          // 未授权，跳转到登录页面
+          wx.navigateTo({
+            url: '/pages/login/login',
+            success: () => {
+              // 登录成功后重新获取数据
+              app.globalData.loginCallback = () => {
+                this.fetchExercises()
+              }
+            }
+          })
+        } else {
+          wx.showToast({
+            title: '网络错误，请稍后重试',
+            icon: 'none'
+          })
+        }
         this.setData({ 
           exercises: [],
           loading: false
