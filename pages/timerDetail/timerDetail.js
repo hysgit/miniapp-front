@@ -73,8 +73,8 @@ Page({
 
   calculateDuration: function(startTime, stopTime) {
     try {
-      const start = new Date(startTime);
-      const end = stopTime ? new Date(stopTime) : new Date();
+      const start = new Date(this.formatDateTime(startTime));
+      const end = stopTime ? new Date(this.formatDateTime(stopTime)) : new Date();
       const diff = Math.floor((end - start) / 1000); // 转换为秒
       
       const days = Math.floor(diff / (24 * 3600));
@@ -103,8 +103,9 @@ Page({
 
   formatDateTime: function(dateTimeStr) {
     if (!dateTimeStr) return '';
-    // 保持 ISO 格式用于计算，但是显示时替换 T
-    return dateTimeStr.split('.')[0];
+    // Convert to ISO format with T separator for cross-platform compatibility
+    const isoDate = dateTimeStr.replace(' ', 'T');
+    return isoDate.split('.')[0];
   },
 
   formatDisplayDateTime: function(dateTimeStr) {
