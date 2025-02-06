@@ -26,7 +26,7 @@
           <view class="countdown-times">
             <view class="time-item">
               <text class="time-label">剩余时间</text>
-              <text class="time-value">{{item.remainingTime}}</text>
+              <text class="time-value {{(item.remainingTime.includes('天') && item.remainingTime.split('天')[0] < 1) || item.remainingTime === '已到期' ? 'time-warning' : ''}}">{{item.remainingTime}}</text>
             </view>
             <view class="time-item end-time">
               <text class="time-label">结束时间</text>

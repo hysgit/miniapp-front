@@ -110,27 +110,68 @@ App({
             wx.removeStorageSync('userInfo')
             wx.removeStorageSync('tokenExpireTime')
             
-            // 重新登录
             try {
+              // 重新登录
               await this.login()
-              // 重新发起原来的请求
-              wx.request({
-                ...options,
-                header: {
-                  ...options.header,
-                  'X-Token': this.globalData.token
-                }
+              
+              // 使用新token重新发起原来的请求
+              return new Promise((resolve, reject) => {
+                wx.request({
+                  ...options,
+                  header: {
+                    ...options.header,
+                    'X-Token': this.globalData.token
+                  },
+                  success: (retryRes) => {
+                    // 如果重试请求还是返回401，说明可能是其他问题，直接调用原始失败回调
+                    if (retryRes.statusCode === 401 || (retryRes.data && retryRes.data.code === 401)) {
+                      console.error('重新登录后请求仍然返回401')
+                      if (originalFail) {
+                        originalFail(retryRes)
+                      }
+                      reject(retryRes)
+                      return
+                    }
+                    
+                    // 重试成功，调用原始成功回调
+                    if (originalSuccess) {
+                      originalSuccess(retryRes)
+                    }
+                    resolve(retryRes)
+                  },
+                  fail: (err) => {
+                    console.error('重试请求失败:', err)
+                    if (originalFail) {
+                      originalFail(err)
+                    }
+                    reject(err)
+                  }
+                })
               })
             } catch (err) {
               console.error('重新登录失败:', err)
-              // 跳转到登录页
-              wx.redirectTo({
+              // 跳转到登录页面并保存回调，等用户手动登录后可以继续之前的操作
+              this.globalData.loginCallback = () => {
+                wx.request({
+                  ...options,
+                  header: {
+                    ...options.header,
+                    'X-Token': this.globalData.token
+                  }
+                })
+              }
+              wx.navigateTo({
                 url: '/pages/login/login'
               })
+              if (originalFail) {
+                originalFail(err)
+              }
+              return Promise.reject(err)
             }
           } else if (originalSuccess) {
             originalSuccess(res)
           }
+          return Promise.resolve(res)
         }
 
         return originalRequest({
